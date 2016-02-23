@@ -17,4 +17,6 @@ public class Config {
     public static int HTTP_READ_TIMEOUT = 20 * 1000;
 
     public static File CACHAE_DIR = null;
+
+    public static String BASE_IMAGE_URL = "http://tnfs.tngou.net/image";
 }
