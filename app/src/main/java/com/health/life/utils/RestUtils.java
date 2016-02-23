@@ -35,6 +35,7 @@ public class RestUtils {
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .client(OkHttpUtils.getInstance())
                     .build();
         }
         else {
