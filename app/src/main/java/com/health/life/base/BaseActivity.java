@@ -5,10 +5,11 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 
+import com.health.life.activity.swipeback.SwipeBackActivity;
 import com.health.life.utils.AbLoadDialogFragment;
 
 
-public class BaseActivity extends FragmentActivity {
+public class BaseActivity extends SwipeBackActivity {
 
 
     /**

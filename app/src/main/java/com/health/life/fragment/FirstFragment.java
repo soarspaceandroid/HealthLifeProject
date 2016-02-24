@@ -1,4 +1,4 @@
-package com.health.life.view.fragment;
+package com.health.life.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

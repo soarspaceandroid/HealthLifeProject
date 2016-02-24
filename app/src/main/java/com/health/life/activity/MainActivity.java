@@ -1,4 +1,4 @@
-package com.health.life.view.activity.main;
+package com.health.life.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
