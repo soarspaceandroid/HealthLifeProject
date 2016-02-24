@@ -2,7 +2,7 @@ package com.health.life.presenter;
 
 import com.health.life.model.bean.BookKindListBean;
 import com.health.life.model.enity.BookEnity;
-import com.health.life.model.view.BookKindViewInterface;
+import com.health.life.model.view.BaseViewInterface;
 import com.health.life.utils.RestUtils;
 
 import rx.Subscriber;
@@ -17,9 +17,9 @@ import rx.schedulers.Schedulers;
 public class BookKindPresenter
 {
     private BookEnity apiService;
-    private BookKindViewInterface bookView;
+    private BaseViewInterface bookView;
 
-    public BookKindPresenter(BookKindViewInterface bookView)
+    public BookKindPresenter(BaseViewInterface bookView)
     {
 
         apiService = RestUtils.createApi(BookEnity.class);

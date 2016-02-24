@@ -2,7 +2,7 @@ package com.health.life.presenter;
 
 import com.health.life.model.bean.BookListInfo;
 import com.health.life.model.enity.BookListEnity;
-import com.health.life.model.view.BookListViewInterface;
+import com.health.life.model.view.BaseViewInterface;
 import com.health.life.utils.RestUtils;
 
 import rx.Subscriber;
@@ -16,9 +16,9 @@ public class BookListPresenter {
 
     private BookListEnity bookListEnity;
 
-    private BookListViewInterface bookListViewInterface;
+    private BaseViewInterface bookListViewInterface;
 
-    public BookListPresenter(BookListViewInterface bookListViewInterface) {
+    public BookListPresenter(BaseViewInterface bookListViewInterface) {
         this.bookListEnity = RestUtils.createApi(BookListEnity.class);
         this.bookListViewInterface = bookListViewInterface;
     }

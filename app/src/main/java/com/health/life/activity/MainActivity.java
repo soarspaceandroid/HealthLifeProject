@@ -11,12 +11,12 @@ import com.health.life.adapter.TabsFragmentAdapter;
 import com.health.life.base.BaseActivity;
 import com.health.life.model.bean.BookKindBean;
 import com.health.life.model.bean.BookKindListBean;
-import com.health.life.model.view.BookKindViewInterface;
+import com.health.life.model.view.BaseViewInterface;
 import com.health.life.presenter.BookKindPresenter;
 
 import java.util.List;
 
-public class MainActivity extends BaseActivity implements BookKindViewInterface {
+public class MainActivity extends BaseActivity implements BaseViewInterface<BookKindListBean> {
 
     private BookKindPresenter bookKindPresenter;
 

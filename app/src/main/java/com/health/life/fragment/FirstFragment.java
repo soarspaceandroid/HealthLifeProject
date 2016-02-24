@@ -11,7 +11,7 @@ import android.widget.ListView;
 import com.health.life.R;
 import com.health.life.adapter.BookListAdapter;
 import com.health.life.model.bean.BookListInfo;
-import com.health.life.model.view.BookListViewInterface;
+import com.health.life.model.view.BaseViewInterface;
 import com.health.life.presenter.BookListPresenter;
 
 import java.util.HashMap;
@@ -20,7 +20,7 @@ import java.util.Map;
 /**
  * Created by ligang967 on 16/2/23.
  */
-public class FirstFragment extends Fragment implements BookListViewInterface{
+public class FirstFragment extends Fragment implements BaseViewInterface<BookListInfo>{
 
     private View self;
 
