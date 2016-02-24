@@ -17,7 +17,6 @@ public class BasePresenter {
 
     private BaseViewInterface bookListViewInterface;
     private RequestListener listener;
-    private DoRequest doRequest;
 
     public BasePresenter(BaseViewInterface baseViewInterface , RequestListener ls) {
         this.bookListViewInterface = baseViewInterface;
