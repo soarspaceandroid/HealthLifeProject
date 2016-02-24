@@ -9,7 +9,7 @@ import com.health.life.interfaces.RequestListener;
 import com.health.life.utils.AbLoadDialogFragment;
 
 
-public class BaseActivity extends FragmentActivity implements RequestListener{
+public class BaseFragment extends android.support.v4.app.Fragment implements RequestListener{
 
 
     /**
@@ -56,11 +56,11 @@ public class BaseActivity extends FragmentActivity implements RequestListener{
 
     @Override
     public void showProgressDialog() {
-        showLoadDialog(this);
+        showLoadDialog(getActivity());
     }
 
     @Override
     public void hideProgressDialog() {
-        removeDialog(this);
+     removeDialog(getActivity());
     }
 }

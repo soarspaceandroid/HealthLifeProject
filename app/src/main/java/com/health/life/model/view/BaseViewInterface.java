@@ -7,9 +7,5 @@ public interface BaseViewInterface<T>{
 
     void updateView(T t);
 
-    void showProgressDialog();
-
-    void hideProgressDialog();
-
     void showError(String msg);
 }

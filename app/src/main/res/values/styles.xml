@@ -16,4 +16,12 @@
         <item name="shadow_bottom">@mipmap/shadow_bottom</item>
     </style>
 
+
+    <!-- progress dialog -->
+    <style name="float_progress" parent="android:style/Theme.Dialog">
+        <!-- float_box为我们定义的窗口背景 ，这个不是必须的-->
+        <item name="android:windowBackground">@drawable/progress_dialog_back</item>
+        <item name="android:layout_margin">@dimen/progress_dialog_margin</item>
+    </style>
+
 </resources>

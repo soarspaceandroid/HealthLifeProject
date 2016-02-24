@@ -9,16 +9,20 @@ import com.camnter.easyslidingtabs.widget.EasySlidingTabs;
 import com.health.life.R;
 import com.health.life.adapter.TabsFragmentAdapter;
 import com.health.life.base.BaseActivity;
+import com.health.life.interfaces.DoRequest;
 import com.health.life.model.bean.BookKindBean;
 import com.health.life.model.bean.BookKindListBean;
+import com.health.life.model.enity.BookEnity;
 import com.health.life.model.view.BaseViewInterface;
-import com.health.life.presenter.BookKindPresenter;
+import com.health.life.presenter.BasePresenter;
 
 import java.util.List;
 
-public class MainActivity extends BaseActivity implements BaseViewInterface<BookKindListBean> {
+import rx.Observable;
 
-    private BookKindPresenter bookKindPresenter;
+public class MainActivity extends BaseActivity implements BaseViewInterface<BookKindListBean>{
+
+    private BasePresenter basePresenter;
 
     private EasySlidingTabs easySlidingTabs;
     private ViewPager easyVP;
@@ -28,7 +32,7 @@ public class MainActivity extends BaseActivity implements BaseViewInterface<Book
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.initViews();
-        bookKindPresenter = new BookKindPresenter(this);
+        basePresenter = new BasePresenter(this , this);
     }
 
 
@@ -49,8 +53,12 @@ public class MainActivity extends BaseActivity implements BaseViewInterface<Book
     @Override
     protected void onResume() {
         super.onResume();
-
-        bookKindPresenter.getClassify();
+        basePresenter.getRequestResult(BookEnity.class, new DoRequest<BookKindListBean>() {
+            @Override
+            public Observable<BookKindListBean> doRequest(Object t) {
+                return ((BookEnity) t).getClassify();
+            }
+        });
     }
 
     @Override
@@ -58,20 +66,6 @@ public class MainActivity extends BaseActivity implements BaseViewInterface<Book
 
 
         initData(bookList.getTngou());
-
-    }
-
-    @Override
-    public void showProgressDialog() {
-
-        showLoadDialog(this);
-
-    }
-
-    @Override
-    public void hideProgressDialog() {
-
-        removeDialog(this);
 
     }
 

@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by ligang967 on 16/2/23.
  */
-public class BookListInfo {
+public class BookListInfo extends BaseBean{
 
     /**
      * total : 489

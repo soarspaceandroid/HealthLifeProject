@@ -34,7 +34,7 @@ public class AbLoadDialogFragment extends DialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setStyle(DialogFragment.STYLE_NO_TITLE,android.R.style.Theme_Holo_Light_NoActionBar_Fullscreen);
+		setStyle(DialogFragment.STYLE_NO_TITLE,R.style.float_progress);
 	}
 
 	@Override

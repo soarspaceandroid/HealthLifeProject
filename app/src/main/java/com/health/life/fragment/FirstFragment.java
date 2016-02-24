@@ -2,7 +2,6 @@ package com.health.life.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +9,22 @@ import android.widget.ListView;
 
 import com.health.life.R;
 import com.health.life.adapter.BookListAdapter;
+import com.health.life.base.BaseFragment;
+import com.health.life.interfaces.DoRequest;
 import com.health.life.model.bean.BookListInfo;
+import com.health.life.model.enity.BookListEnity;
 import com.health.life.model.view.BaseViewInterface;
-import com.health.life.presenter.BookListPresenter;
+import com.health.life.presenter.BasePresenter;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import rx.Observable;
+
 /**
  * Created by ligang967 on 16/2/23.
  */
-public class FirstFragment extends Fragment implements BaseViewInterface<BookListInfo>{
+public class FirstFragment extends BaseFragment implements BaseViewInterface<BookListInfo>{
 
     private View self;
 
@@ -30,7 +34,7 @@ public class FirstFragment extends Fragment implements BaseViewInterface<BookLis
 
     private String title;
 
-    private BookListPresenter bookListPresenter;
+    private BasePresenter  basePresenter;
 
     private ListView listView;
 
@@ -71,7 +75,7 @@ public class FirstFragment extends Fragment implements BaseViewInterface<BookLis
 
         id = getArguments().getInt("id");
 
-        bookListPresenter = new BookListPresenter(this);
+        basePresenter = new BasePresenter(this , this);
 
     }
 
@@ -98,8 +102,12 @@ public class FirstFragment extends Fragment implements BaseViewInterface<BookLis
     @Override
     public void onResume() {
         super.onResume();
-
-        this.bookListPresenter.getListById(id,1);
+        this.basePresenter.getRequestResult(BookListEnity.class, new DoRequest<BookListInfo>() {
+            @Override
+            public Observable<BookListInfo> doRequest(Object t) {
+                return ((BookListEnity)t).getListById(id , 10 , 1);
+            }
+        });
     }
 
     @Override
@@ -108,18 +116,7 @@ public class FirstFragment extends Fragment implements BaseViewInterface<BookLis
     }
 
     @Override
-    public void showProgressDialog() {
-
-    }
-
-    @Override
-    public void hideProgressDialog() {
-
-    }
-
-    @Override
     public void showError(String msg) {
 
     }
-
 }

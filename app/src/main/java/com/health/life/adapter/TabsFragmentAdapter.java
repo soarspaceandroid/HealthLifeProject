@@ -7,8 +7,8 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 
 import com.camnter.easyslidingtabs.widget.EasySlidingTabs;
-import com.health.life.model.bean.BookKindBean;
 import com.health.life.fragment.FirstFragment;
+import com.health.life.model.bean.BookKindBean;
 
 import java.util.List;
 
