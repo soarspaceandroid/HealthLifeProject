@@ -22,7 +22,7 @@ import rx.Observable;
 
 public class MainActivity extends BaseActivity implements BaseViewInterface<BookKindListBean>{
 
-    private BasePresenter basePresenter;
+    private BasePresenter bookListPresenter;
 
     private EasySlidingTabs easySlidingTabs;
     private ViewPager easyVP;
@@ -32,7 +32,7 @@ public class MainActivity extends BaseActivity implements BaseViewInterface<Book
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.initViews();
-        basePresenter = new BasePresenter(this , this);
+        bookListPresenter = new BasePresenter<BookKindListBean>(this , this);
     }
 
 
@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity implements BaseViewInterface<Book
     @Override
     protected void onResume() {
         super.onResume();
-        basePresenter.getRequestResult(BookEnity.class, new DoRequest<BookKindListBean>() {
+        bookListPresenter.getRequestResult(BookEnity.class, new DoRequest<BookKindListBean>() {
             @Override
             public Observable<BookKindListBean> doRequest(Object t) {
                 return ((BookEnity) t).getClassify();

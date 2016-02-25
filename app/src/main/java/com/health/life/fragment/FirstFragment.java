@@ -75,7 +75,7 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
 
         id = getArguments().getInt("id");
 
-        basePresenter = new BasePresenter(this , this);
+        basePresenter = new BasePresenter<BookListInfo>(this , this);
 
     }
 
