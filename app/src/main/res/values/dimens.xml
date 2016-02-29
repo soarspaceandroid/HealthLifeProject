@@ -11,4 +11,17 @@
     <dimen name="text_wrapper_right_margin">8dp</dimen>
     <dimen name="divider_height">1dp</dimen>
     <dimen name="menu_text_size">15sp</dimen>
+
+    <dimen name="indicator_right_padding">10dp</dimen>
+    <dimen name="indicator_corner_radius">12dp</dimen>
+    <dimen name="indicator_internal_padding">4dp</dimen>
+    <dimen name="header_footer_left_right_padding">24dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">12dp</dimen>
+
+    <!-- 刷新下拉图片-->
+    <dimen name="refresh_image">20dp</dimen>
+
+
+
+
 </resources>

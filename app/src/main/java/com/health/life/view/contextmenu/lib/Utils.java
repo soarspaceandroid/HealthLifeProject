@@ -56,7 +56,7 @@ public class Utils {
                 (int) context.getResources().getDimension(R.dimen.menu_item_padding));
         imageView.setClickable(false);
         imageView.setFocusable(false);
-        imageView.setBackgroundColor(Color.TRANSPARENT);
+        imageView.setBackgroundColor(Color.GREEN);
 
         if (item.getColor() != 0) {
             Drawable color = new ColorDrawable(item.getColor());

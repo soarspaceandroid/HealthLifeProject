@@ -15,8 +15,10 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.health.life.R;
+import com.health.life.activity.swipeback.SwipeBackActivity;
 import com.health.life.interfaces.RequestListener;
 import com.health.life.utils.AbLoadDialogFragment;
+import com.health.life.utils.SystemBarTintManager;
 import com.health.life.view.TopTitleView;
 import com.health.life.view.contextmenu.lib.ContextMenuDialogFragment;
 import com.health.life.view.contextmenu.lib.MenuObject;
@@ -28,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class BaseActivity extends FragmentActivity implements RequestListener , OnMenuItemClickListener, OnMenuItemLongClickListener {
+public abstract class BaseActivity extends SwipeBackActivity implements RequestListener , OnMenuItemClickListener, OnMenuItemLongClickListener {
 
 
     private FrameLayout content;
@@ -41,6 +43,8 @@ public abstract class BaseActivity extends FragmentActivity implements RequestLi
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_root);
         getWindow().setLayout(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+        SystemBarTintManager tintManager = new SystemBarTintManager(this);
+        tintManager.setTintColor(getResources().getColor(R.color.color_539728)); //  set status bar color
         fragmentManager = getSupportFragmentManager();
         initBaseView();
         initBaseData();
@@ -59,19 +63,42 @@ public abstract class BaseActivity extends FragmentActivity implements RequestLi
     private void initBaseView() {
         content = (FrameLayout) findViewById(R.id.root_container);
         topTitleView = (TopTitleView) findViewById(R.id.topTitleView);
-        topTitleView.getRootLeftRl().setOnClickListener(onClickListener);
+        topTitleView.getRootLeftRl().setOnClickListener(onLeftClickListener);
+        topTitleView.getRootRightRl().setOnClickListener(onRightClickListener);
         topTitleView.setTitle(currActivityName());
         initMenuFragment();
     }
 
-    private View.OnClickListener onClickListener = new View.OnClickListener() {
+    private View.OnClickListener onLeftClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //go menu
-            mMenuDialogFragment.show(fragmentManager, ContextMenuDialogFragment.TAG);
+            //go back
+            finish();
         }
     };
 
+    /***
+     *  如果是文章 健康详情  显示菜单可供用户操作  default gone
+     */
+    public void showRightMenu(boolean show){
+        topTitleView.getRootRightRl().setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+
+    /**
+     * 显示返回按钮  default 显示
+     * @param show
+     */
+    public void showLeftBack(boolean show){
+        topTitleView.getRootLeftRl().setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    private View.OnClickListener onRightClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            mMenuDialogFragment.show(fragmentManager, ContextMenuDialogFragment.TAG);
+        }
+    };
     public TopTitleView getTopTitleView(){
         return topTitleView;
     }
@@ -195,30 +222,27 @@ public abstract class BaseActivity extends FragmentActivity implements RequestLi
         MenuObject close = new MenuObject();
         close.setResource(R.drawable.icn_close);
 
-        MenuObject send = new MenuObject("Send message");
+        MenuObject send = new MenuObject("评论");
         send.setResource(R.drawable.icn_1);
 
-        MenuObject like = new MenuObject("Like profile");
+        MenuObject like = new MenuObject("收藏");
         Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.icn_2);
         like.setBitmap(b);
 
-        MenuObject addFr = new MenuObject("Add to friends");
+        MenuObject addFr = new MenuObject("点赞");
         BitmapDrawable bd = new BitmapDrawable(getResources(),
                 BitmapFactory.decodeResource(getResources(), R.drawable.icn_3));
         addFr.setDrawable(bd);
 
-        MenuObject addFav = new MenuObject("Add to favorites");
+        MenuObject addFav = new MenuObject("登录");
         addFav.setResource(R.drawable.icn_4);
 
-        MenuObject block = new MenuObject("Block user");
-        block.setResource(R.drawable.icn_5);
 
         menuObjects.add(close);
         menuObjects.add(send);
         menuObjects.add(like);
         menuObjects.add(addFr);
         menuObjects.add(addFav);
-        menuObjects.add(block);
         return menuObjects;
     }
 
