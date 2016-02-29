@@ -1,4 +1,4 @@
-package com.health.life.model.bean;
+package com.health.life.model.bean.output;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * 图片Bean
  * Created by ligang967 on 16/1/20.
  */
-public class BookKindBean extends BaseBean{
+public class BookKindBeanOutput extends BaseBeanOutput {
 
     @SerializedName("id")
     private int id;

@@ -11,8 +11,9 @@ import com.health.life.R;
 import com.health.life.adapter.BookListAdapter;
 import com.health.life.base.BaseFragment;
 import com.health.life.interfaces.DoRequest;
-import com.health.life.model.bean.BookListInfo;
-import com.health.life.model.enity.BookListEnity;
+import com.health.life.model.bean.input.BookListInfoInput;
+import com.health.life.model.bean.output.BookListInfoOutput;
+import com.health.life.model.enity.BaseEnity;
 import com.health.life.model.view.BaseViewInterface;
 import com.health.life.presenter.BasePresenter;
 
@@ -24,7 +25,7 @@ import rx.Observable;
 /**
  * Created by ligang967 on 16/2/23.
  */
-public class FirstFragment extends BaseFragment implements BaseViewInterface<BookListInfo>{
+public class FirstFragment extends BaseFragment implements BaseViewInterface<BookListInfoOutput>{
 
     private View self;
 
@@ -75,7 +76,7 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
 
         id = getArguments().getInt("id");
 
-        basePresenter = new BasePresenter<BookListInfo>(this , this);
+        basePresenter = new BasePresenter<BookListInfoOutput>(this , this);
 
     }
 
@@ -102,16 +103,16 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
     @Override
     public void onResume() {
         super.onResume();
-        this.basePresenter.getRequestResult(BookListEnity.class, new DoRequest<BookListInfo>() {
+        this.basePresenter.getRequestResult(new DoRequest<BookListInfoOutput>() {
             @Override
-            public Observable<BookListInfo> doRequest(Object t) {
-                return ((BookListEnity)t).getListById(id , 10 , 1);
+            public Observable<BookListInfoOutput> doRequest(Object t) {
+                return ((BaseEnity)t).getListById(new BookListInfoInput(id , 10 , 1));
             }
-        });
+        }  ,true);
     }
 
     @Override
-    public void updateView(BookListInfo bookListInfo) {
+    public void updateView(BookListInfoOutput bookListInfo) {
         listView.setAdapter(new BookListAdapter(bookListInfo.getTngou(),getActivity()));
     }
 

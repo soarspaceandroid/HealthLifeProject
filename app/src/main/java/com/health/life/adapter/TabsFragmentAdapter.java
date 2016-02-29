@@ -8,7 +8,7 @@ import android.text.TextUtils;
 
 import com.camnter.easyslidingtabs.widget.EasySlidingTabs;
 import com.health.life.fragment.FirstFragment;
-import com.health.life.model.bean.BookKindBean;
+import com.health.life.model.bean.output.BookKindBeanOutput;
 
 import java.util.List;
 
@@ -17,9 +17,9 @@ import java.util.List;
  */
 public class TabsFragmentAdapter extends FragmentPagerAdapter implements EasySlidingTabs.TabsTitleInterface {
 
-    private List<BookKindBean> titles;
+    private List<BookKindBeanOutput> titles;
 
-    public TabsFragmentAdapter(FragmentManager fm, List<BookKindBean> titles) {
+    public TabsFragmentAdapter(FragmentManager fm, List<BookKindBeanOutput> titles) {
         super(fm);
         this.titles = titles;
     }

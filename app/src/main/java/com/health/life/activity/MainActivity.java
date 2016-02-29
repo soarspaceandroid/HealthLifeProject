@@ -10,9 +10,9 @@ import com.health.life.R;
 import com.health.life.adapter.TabsFragmentAdapter;
 import com.health.life.base.BaseActivity;
 import com.health.life.interfaces.DoRequest;
-import com.health.life.model.bean.BookKindBean;
-import com.health.life.model.bean.BookKindListBean;
-import com.health.life.model.enity.BookEnity;
+import com.health.life.model.bean.output.BookKindBeanOutput;
+import com.health.life.model.bean.output.BookKindListBeanOutput;
+import com.health.life.model.enity.BaseEnity;
 import com.health.life.model.view.BaseViewInterface;
 import com.health.life.presenter.BasePresenter;
 
@@ -20,7 +20,7 @@ import java.util.List;
 
 import rx.Observable;
 
-public class MainActivity extends BaseActivity implements BaseViewInterface<BookKindListBean>{
+public class MainActivity extends BaseActivity implements BaseViewInterface<BookKindListBeanOutput>{
 
     private BasePresenter bookListPresenter;
 
@@ -32,7 +32,7 @@ public class MainActivity extends BaseActivity implements BaseViewInterface<Book
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.initViews();
-        bookListPresenter = new BasePresenter<BookKindListBean>(this , this);
+        bookListPresenter = new BasePresenter<BookKindListBeanOutput>(this , this);
     }
 
 
@@ -43,7 +43,7 @@ public class MainActivity extends BaseActivity implements BaseViewInterface<Book
         this.easyVP = (ViewPager) this.findViewById(R.id.easy_vp);
     }
 
-    private void initData(List<BookKindBean> list) {
+    private void initData(List<BookKindBeanOutput> list) {
         this.adapter = new TabsFragmentAdapter(this.getSupportFragmentManager(), list);
         this.easyVP.setAdapter(this.adapter);
         this.easySlidingTabs.setViewPager(this.easyVP);
@@ -53,17 +53,16 @@ public class MainActivity extends BaseActivity implements BaseViewInterface<Book
     @Override
     protected void onResume() {
         super.onResume();
-        bookListPresenter.getRequestResult(BookEnity.class, new DoRequest<BookKindListBean>() {
+        bookListPresenter.getRequestResult(new DoRequest<BookKindListBeanOutput>() {
             @Override
-            public Observable<BookKindListBean> doRequest(Object t) {
-                return ((BookEnity) t).getClassify();
+            public Observable<BookKindListBeanOutput> doRequest(Object t) {
+                return ((BaseEnity) t).getClassify();
             }
-        });
+        } , true);
     }
 
     @Override
-    public void updateView(BookKindListBean bookList) {
-
+    public void updateView(BookKindListBeanOutput bookList) {
 
         initData(bookList.getTngou());
 

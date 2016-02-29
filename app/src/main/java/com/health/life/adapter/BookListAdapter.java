@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.health.life.R;
-import com.health.life.model.bean.BookListInfo;
+import com.health.life.model.bean.output.BookListInfoOutput;
 import com.health.life.utils.Config;
 import com.squareup.picasso.Picasso;
 
@@ -21,11 +21,11 @@ import java.util.List;
  */
 public class BookListAdapter extends BaseAdapter {
 
-    private List<BookListInfo.TngouEntity> tngou;
+    private List<BookListInfoOutput.TngouEntity> tngou;
 
     private Context context;
 
-    public BookListAdapter(List<BookListInfo.TngouEntity> tngou, Context context) {
+    public BookListAdapter(List<BookListInfoOutput.TngouEntity> tngou, Context context) {
         this.tngou = tngou;
         this.context = context;
     }
@@ -66,7 +66,7 @@ public class BookListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        BookListInfo.TngouEntity entity = tngou.get(position);
+        BookListInfoOutput.TngouEntity entity = tngou.get(position);
 
         viewHolder.name.setText(entity.getTitle() + "");
 

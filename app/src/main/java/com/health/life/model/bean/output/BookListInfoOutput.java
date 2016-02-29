@@ -1,11 +1,11 @@
-package com.health.life.model.bean;
+package com.health.life.model.bean.output;
 
 import java.util.List;
 
 /**
  * Created by ligang967 on 16/2/23.
  */
-public class BookListInfo extends BaseBean{
+public class BookListInfoOutput extends BaseBeanOutput {
 
     /**
      * total : 489

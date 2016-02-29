@@ -2,7 +2,8 @@ package com.health.life.presenter;
 
 import com.health.life.interfaces.DoRequest;
 import com.health.life.interfaces.RequestListener;
-import com.health.life.model.bean.BaseBean;
+import com.health.life.model.bean.output.BaseBeanOutput;
+import com.health.life.model.enity.BaseEnity;
 import com.health.life.model.view.BaseViewInterface;
 import com.health.life.utils.RestUtils;
 
@@ -14,7 +15,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by ligang967 on 16/2/23.
  */
-public class BasePresenter<T extends  BaseBean>{
+public class BasePresenter<T extends BaseBeanOutput>{
 
     private BaseViewInterface bookListViewInterface;
     private RequestListener listener;
@@ -26,17 +27,19 @@ public class BasePresenter<T extends  BaseBean>{
     }
 
 
-    public <F> Observable<T> getObservable(Class<F> clz , DoRequest doRequest){
+    public Observable<T> getObservable(DoRequest doRequest){
         if(observable == null) {
-            F eEnity = RestUtils.createApi(clz);
+            BaseEnity eEnity = RestUtils.createApi(BaseEnity.class);
             observable = doRequest.doRequest(eEnity);
         }
         return observable;
     }
 
-    public <F> void  getRequestResult(Class<F> clz , DoRequest doRequest){
-        listener.showProgressDialog();
-        getObservable(clz , doRequest).observeOn(AndroidSchedulers.mainThread())
+    public void  getRequestResult(DoRequest doRequest , boolean showDialog){
+        if(showDialog) {
+            listener.showProgressDialog();
+        }
+        getObservable(doRequest).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<T>() {
                     @Override

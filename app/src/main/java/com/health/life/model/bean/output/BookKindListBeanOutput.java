@@ -1,4 +1,4 @@
-package com.health.life.model.bean;
+package com.health.life.model.bean.output;
 
 import java.util.List;
 
@@ -6,18 +6,17 @@ import java.util.List;
  * 图片列表
  * Created by ligang967 on 16/1/20.
  */
-public class BookKindListBean extends BaseBean {
+public class BookKindListBeanOutput extends BaseBeanOutput {
 
-    final static String requestAPI = "/api/info/list";
-    private List<BookKindBean> tngou;
+    private List<BookKindBeanOutput> tngou;
 
     private String status;
 
-    public List<BookKindBean> getTngou() {
+    public List<BookKindBeanOutput> getTngou() {
         return tngou;
     }
 
-    public void setTngou(List<BookKindBean> tngou) {
+    public void setTngou(List<BookKindBeanOutput> tngou) {
         this.tngou = tngou;
     }
 
