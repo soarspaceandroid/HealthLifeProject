@@ -8,27 +8,26 @@ import android.view.ViewGroup;
 
 import com.health.life.R;
 import com.health.life.base.BaseFragment;
-import com.health.life.model.bean.output.BookKindBeanOutput;
+import com.health.life.model.bean.output.BookListInfoOutput;
 import com.health.life.model.view.BaseViewInterface;
 
 /**
  * Created by gaofei on 16/2/23.
  */
-public class HealthFragment extends BaseFragment implements BaseViewInterface<BookKindBeanOutput>{
-
+public class MyFragment extends BaseFragment implements BaseViewInterface<BookListInfoOutput>{
 
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.health_fragment, null);
+        View view = inflater.inflate(R.layout.my_fragment, null);
 
         return view;
     }
 
     @Override
-    public void updateView(BookKindBeanOutput bookListInfo) {
+    public void updateView(BookListInfoOutput bookListInfo) {
     }
 
     @Override

@@ -39,7 +39,6 @@ public class CustomTabView extends LinearLayout{
     private RecyclerView mRecyclerView;
     private TabViewAdapter mAdapter;
     private Context mViewContext;
-    public float mAverageWidth = 0;
     private List<TabViewData> dataList ;
 
     private int mLeftMargin = 0; // other width of view or layout
