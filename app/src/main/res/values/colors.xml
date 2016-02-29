@@ -5,4 +5,12 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorProgressBack">#20000000</color>
     <color name="colorProgressBacksolid">#aaa7c0dc</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_539728">#539728</color>
+    <color name="color_e7343a">#e7343a</color>
+    <color name="white">#ffffff</color>
+    <color name="menu_fragment_background">#B3000000</color>
+    <color name="menu_item_background">#f2f2f2</color>
+    <color name="divider_color">#b5b5b5</color>
+
 </resources>

@@ -35,7 +35,10 @@ public class MainActivity extends BaseActivity implements BaseViewInterface<Book
         bookListPresenter = new BasePresenter<BookKindListBeanOutput>(this , this);
     }
 
-
+    @Override
+    protected String currActivityName() {
+        return "新闻";
+    }
 
     private void initViews(){
         this.easySlidingTabs = (EasySlidingTabs) this.findViewById(R.id.easy_sliding_tabs);
@@ -74,4 +77,5 @@ public class MainActivity extends BaseActivity implements BaseViewInterface<Book
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 
     }
+
 }
