@@ -255,4 +255,7 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
     public void onMenuItemLongClick(View clickedView, int position) {
 
     }
+
+
+
 }

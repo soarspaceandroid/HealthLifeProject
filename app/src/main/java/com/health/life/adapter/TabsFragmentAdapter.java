@@ -7,7 +7,7 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 
 import com.camnter.easyslidingtabs.widget.EasySlidingTabs;
-import com.health.life.fragment.FirstFragment;
+import com.health.life.fragment.HealthFragment;
 import com.health.life.model.bean.output.BookKindBeanOutput;
 
 import java.util.List;
@@ -62,7 +62,7 @@ public class TabsFragmentAdapter extends FragmentPagerAdapter implements EasySli
 
         int id=titles.get(position).getId();
 
-        Fragment fragment = FirstFragment.getInstance(title,id);
+        Fragment fragment = HealthFragment.getInstance(title, id);
 
         return fragment;
     }

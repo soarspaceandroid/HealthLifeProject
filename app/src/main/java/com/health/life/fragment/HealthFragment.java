@@ -25,11 +25,11 @@ import rx.Observable;
 /**
  * Created by ligang967 on 16/2/23.
  */
-public class FirstFragment extends BaseFragment implements BaseViewInterface<BookListInfoOutput>{
+public class HealthFragment extends BaseFragment implements BaseViewInterface<BookListInfoOutput>{
 
     private View self;
 
-    private static Map<String, FirstFragment> instance;
+    private static Map<String, HealthFragment> instance;
 
     private int id;
 
@@ -40,20 +40,20 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
     private ListView listView;
 
 
-    public static FirstFragment getInstance(String title,int id) {
+    public static HealthFragment getInstance(String title,int id) {
         if (instance == null) {
-            instance = new HashMap<String, FirstFragment>();
+            instance = new HashMap<String, HealthFragment>();
         }
 
         return getFragmentByTitle(title,id);
     }
 
-    private static FirstFragment getFragmentByTitle(String title,int id) {
+    private static HealthFragment getFragmentByTitle(String title,int id) {
 
-        FirstFragment firstFragment = instance.get(title);
+        HealthFragment firstFragment = instance.get(title);
 
         if (firstFragment == null) {
-            firstFragment = new FirstFragment();
+            firstFragment = new HealthFragment();
 
             Bundle bundle = new Bundle();
 
@@ -91,7 +91,7 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (this.self == null) {
-            this.self = inflater.inflate(R.layout.first_fragment, null);
+            this.self = inflater.inflate(R.layout.health_fragment, null);
         }
 
         listView = (ListView)this.self.findViewById(R.id.list_view);

@@ -22,6 +22,12 @@
     <dimen name="refresh_image">20dp</dimen>
 
 
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="item_width">72dp</dimen>
+    <dimen name="tab_item_height">56dp</dimen>
+    <dimen name="item_image_width">31.5dp</dimen>
+    <dimen name="item_image_margin_top">5.6dp</dimen>
+    <dimen name="item_image_margin_bottom">9.024dp</dimen>
 
 
 </resources>
