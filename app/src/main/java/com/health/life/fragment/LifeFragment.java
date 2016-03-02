@@ -30,7 +30,7 @@ public class LifeFragment extends BaseFragment implements BaseViewInterface<Cook
 
     @Override
     public void updateView(CookClassfyOutput bookKindListBeanOutput) {
-            Log.e("soar", "test --- " + bookKindListBeanOutput.getTngou().size());
+            Log.e("soar", "test --- " + bookKindListBeanOutput.tngou.get(0).name);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class LifeFragment extends BaseFragment implements BaseViewInterface<Cook
 
     protected void requestData() {
 
-        BasePresenter.getInstance().setBookListViewInterface(this).setRequestListener(this).setInput(new CookClassifyInput(1)).load();
+        BasePresenter.getInstance().setBaseViewInterface(this).setRequestListener(this).setInput(new CookClassifyInput(1)).load();
 
     }
 }

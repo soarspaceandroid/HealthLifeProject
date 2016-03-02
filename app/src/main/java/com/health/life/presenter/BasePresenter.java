@@ -16,7 +16,7 @@ import rx.schedulers.Schedulers;
  */
 public class BasePresenter<T extends BaseBeanOutput> {
 
-    private BaseViewInterface bookListViewInterface;
+    private BaseViewInterface baseViewInterface;
 
     private static BasePresenter basePresenter = null;
 
@@ -42,8 +42,8 @@ public class BasePresenter<T extends BaseBeanOutput> {
     }
 
 
-    public BasePresenter setBookListViewInterface(BaseViewInterface bookListViewInterface) {
-        this.bookListViewInterface = bookListViewInterface;
+    public BasePresenter setBaseViewInterface(BaseViewInterface baseViewInterface) {
+        this.baseViewInterface = baseViewInterface;
         return basePresenter;
     }
 
@@ -77,12 +77,12 @@ public class BasePresenter<T extends BaseBeanOutput> {
                         if (input.isShowDialog()&&requestListener!=null) {
                             requestListener.hideProgressDialog();
                         }
-                        bookListViewInterface.showError(e.getMessage());
+                        baseViewInterface.showError(e.getMessage());
                     }
 
                     @Override
                     public void onNext(T t) {
-                        bookListViewInterface.updateView(t);
+                        baseViewInterface.updateView(t);
                     }
                 });
 

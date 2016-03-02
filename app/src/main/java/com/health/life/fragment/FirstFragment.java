@@ -97,7 +97,7 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
     public void onResume() {
         super.onResume();
 
-        BasePresenter.getInstance().setBookListViewInterface(this).setInput(new BookListInfoInput(id , 10 , 1)).load();
+        BasePresenter.getInstance().setBaseViewInterface(this).setInput(new BookListInfoInput(id , 10 , 1)).load();
     }
 
     @Override

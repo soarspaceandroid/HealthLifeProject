@@ -44,7 +44,7 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
         super.setContentView(R.layout.activity_root);
         getWindow().setLayout(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
         SystemBarTintManager tintManager = new SystemBarTintManager(this);
-        tintManager.setTintColor(getResources().getColor(R.color.color_539728)); //  set status bar color
+        tintManager.setTintColor(R.color.color_539728); //  set status bar color
         fragmentManager = getSupportFragmentManager();
         initBaseView();
         initBaseData();
