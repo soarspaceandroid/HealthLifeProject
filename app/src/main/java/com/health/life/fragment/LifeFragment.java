@@ -42,5 +42,8 @@ public class LifeFragment extends BaseFragment implements BaseViewInterface<Cook
         BasePresenter.getInstance().setBaseViewInterface(this).setRequestListener(this).setInput(new CookClassifyInput(1)).load();
     }
 
-
+    @Override
+    protected String currentTitle() {
+        return "生活";
+    }
 }

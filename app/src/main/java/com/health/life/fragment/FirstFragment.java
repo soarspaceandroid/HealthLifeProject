@@ -74,6 +74,11 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
     }
 
     @Override
+    protected String currentTitle() {
+        return "first";
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
 

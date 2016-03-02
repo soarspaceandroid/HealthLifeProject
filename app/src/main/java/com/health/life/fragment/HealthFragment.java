@@ -40,4 +40,9 @@ public class HealthFragment extends BaseFragment implements BaseViewInterface<Bo
     protected void requestData() {
 
     }
+
+    @Override
+    protected String currentTitle() {
+        return "健康";
+    }
 }

@@ -38,4 +38,9 @@ public class MyFragment extends BaseFragment implements BaseViewInterface<BookLi
     protected void requestData() {
 
     }
+
+    @Override
+    protected String currentTitle() {
+        return "我的";
+    }
 }
