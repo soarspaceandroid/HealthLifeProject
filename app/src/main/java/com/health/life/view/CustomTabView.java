@@ -227,8 +227,8 @@ public class CustomTabView extends LinearLayout{
                     animBackColor(holder.mViewLinear, mDataset.get(position).getBackColor(), mSelectColor);
                     holder.mTextView.setTextColor(getResources().getColor(R.color.color_539728));
                 } else if (mLastSelectPosition == position) {
-                    holder.mImageView.setImageResource(mDataset.get(position).getImageId());
-                    animBackColor(holder.mViewLinear, mSelectColor, mDataset.get(position).getBackColor());
+//                    holder.mImageView.setImageResource(mDataset.get(position).getImageId());
+//                    animBackColor(holder.mViewLinear, mSelectColor, mDataset.get(position).getBackColor());
                     holder.mTextView.setTextColor(getResources().getColor(R.color.color_999999));
                 }
                 animBackColor(holder.mViewLinear, mDataset.get(position).getBackColor(), mDataset.get(position).getBackColor());

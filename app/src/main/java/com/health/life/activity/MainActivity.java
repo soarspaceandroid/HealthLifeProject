@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.widget.Toast;
 
 import com.health.life.R;
 import com.health.life.base.BaseActivity;
@@ -22,6 +21,7 @@ public class MainActivity extends BaseActivity{
 
     private CustomTabView mCustomTabView;
     private List<BaseFragment> listFragment = new ArrayList<>();
+    private int mLastselectFragment = 0;
 
     private final static String[] mFragmentTag = {"healthfragment","lifefragment","myfragment"};
 
@@ -36,6 +36,11 @@ public class MainActivity extends BaseActivity{
 
 
         initTabView();
+
+    }
+
+    @Override
+    protected void requestData() {
 
     }
 
@@ -59,12 +64,6 @@ public class MainActivity extends BaseActivity{
 
 
 
-    @Override
-    public void showError(String msg) {
-
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-
-    }
 
     private void initTabView(){
         listFragment.add(new HealthFragment());
@@ -79,32 +78,48 @@ public class MainActivity extends BaseActivity{
         mCustomTabView.setOnTabClickListener(new CustomTabView.OnTabClickListener() {
             @Override
             public void onTabClick(View itemView, int position) {
-                Toast.makeText(MainActivity.this, "3个item中的第 " + position + "个", Toast.LENGTH_SHORT).show();
+                switchFragment(listFragment.get(position) , mLastselectFragment , position , true);
+                mLastselectFragment = position;
             }
         });
+
+        switchFragment(listFragment.get(0) , 0 , 0 ,true);
     }
 
 
 
-//    protected void switchFragment(Fragment mFragment, int selectedPage, int currPage, boolean isAnim) {
-//        Fragment orginFragment = getSupportFragmentManager().findFragmentByTag(mFragmentTag[selectedPage]);
-//        FragmentTransaction ft = getFragm6entTransaction(isAnim , selectedPage ,currPage);
-//        if (mFragment != null && !mFragment.isAdded()) {
-//            if(orginFragment !=null){
-//                ft.hide(orginFragment).add(R.id.home_contain, mFragment, mFragmentTag[currPage]);
-//            }else{
-//                ft.add(R.id.home_contain, mFragment, mFragmentTag[currPage]);
-//            }
-//
-//        } else {
-//            if(orginFragment !=null){
-//                ft.hide(orginFragment).show(mFragment);
-//            }else{
-//                ft.show(mFragment);
-//            }
-//
-//        }
-//        ft.commit();
-//    }
+    protected void switchFragment(Fragment mFragment, int selectedPage, int currPage, boolean isAnim) {
+        Fragment orginFragment = getSupportFragmentManager().findFragmentByTag(mFragmentTag[selectedPage]);
+        FragmentTransaction ft = getFragmentTransaction(isAnim, selectedPage, currPage);
+        if (mFragment != null && !mFragment.isAdded()) {
+            if(orginFragment !=null){
+                ft.hide(orginFragment).add(R.id.container, mFragment, mFragmentTag[currPage]);
+            }else{
+                ft.add(R.id.container, mFragment, mFragmentTag[currPage]);
+            }
+
+        } else {
+            if(orginFragment !=null){
+                ft.hide(orginFragment).show(mFragment);
+            }else{
+                ft.show(mFragment);
+            }
+
+        }
+        ft.commit();
+    }
+
+
+    private FragmentTransaction getFragmentTransaction(boolean isAnimation , int selectedPage , int currPage){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (isAnimation) {
+            if (selectedPage < currPage) {
+                ft.setCustomAnimations(R.anim.slide_left_in, R.anim.slide_left_out);
+            } else {
+                ft.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_right_out);
+            }
+        }
+        return ft;
+    }
 
 }

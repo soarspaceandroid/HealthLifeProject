@@ -34,4 +34,5 @@ public class MyFragment extends BaseFragment implements BaseViewInterface<BookLi
     public void showError(String msg) {
 
     }
+
 }

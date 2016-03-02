@@ -105,8 +105,8 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
         super.onResume();
         this.basePresenter.getRequestResult(new DoRequest<BookListInfoOutput>() {
             @Override
-            public Observable<BookListInfoOutput> doRequest(Object t) {
-                return ((BaseEnity)t).getListById(new BookListInfoInput(id , 10 , 1));
+            public Observable<BookListInfoOutput> doRequest(BaseEnity baseEnity) {
+                return baseEnity.getListById(new BookListInfoInput(id, 10, 1));
             }
         }  ,true);
     }
@@ -120,4 +120,5 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
     public void showError(String msg) {
 
     }
+
 }

@@ -48,12 +48,19 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
         fragmentManager = getSupportFragmentManager();
         initBaseView();
         initBaseData();
+        requestData();
 
     }
 
     /**描述当前页面的title--便于友盟统计*/
     protected abstract String currActivityName();
 
+
+    /**
+     * 请求数据
+     * @return
+     */
+    protected abstract void requestData();
 
 
     private void initBaseData() {

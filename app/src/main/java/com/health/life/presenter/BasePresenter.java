@@ -26,7 +26,11 @@ public class BasePresenter<T extends BaseBeanOutput>{
         this.listener = ls;
     }
 
-
+    /**
+     * 有数据处理新建 presenter时候使用
+     * @param doRequest
+     * @return
+     */
     public Observable<T> getObservable(DoRequest doRequest){
         if(observable == null) {
             BaseEnity eEnity = RestUtils.createApi(BaseEnity.class);
@@ -35,6 +39,11 @@ public class BasePresenter<T extends BaseBeanOutput>{
         return observable;
     }
 
+    /**
+     * 默认使用这个方法获取data
+     * @param doRequest
+     * @param showDialog
+     */
     public void  getRequestResult(DoRequest doRequest , boolean showDialog){
         if(showDialog) {
             listener.showProgressDialog();

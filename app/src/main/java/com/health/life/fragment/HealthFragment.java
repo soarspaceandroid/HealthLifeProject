@@ -35,4 +35,5 @@ public class HealthFragment extends BaseFragment implements BaseViewInterface<Bo
     public void showError(String msg) {
 
     }
+
 }
