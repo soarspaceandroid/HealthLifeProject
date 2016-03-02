@@ -1,9 +1,14 @@
 package com.health.life.model.bean.input;
 
+import com.health.life.model.bean.output.BookListInfoOutput;
+import com.health.life.model.enity.BaseEnity;
+
+import rx.Observable;
+
 /**
  * Created by gaofei on 2016/2/26.
  */
-public class BookListInfoInput extends BaseBeanInput{
+public class BookListInfoInput extends BaseBeanInput {
 
     private int page;
     private int rows;
@@ -38,4 +43,13 @@ public class BookListInfoInput extends BaseBeanInput{
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public Observable<BookListInfoOutput> getData(BaseEnity baseEnity) {
+
+        Observable<BookListInfoOutput> observable = baseEnity.getListById(this);
+
+        return observable;
+    }
+
 }

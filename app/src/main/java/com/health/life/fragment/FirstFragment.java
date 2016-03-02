@@ -10,17 +10,13 @@ import android.widget.ListView;
 import com.health.life.R;
 import com.health.life.adapter.BookListAdapter;
 import com.health.life.base.BaseFragment;
-import com.health.life.interfaces.DoRequest;
 import com.health.life.model.bean.input.BookListInfoInput;
 import com.health.life.model.bean.output.BookListInfoOutput;
-import com.health.life.model.enity.BaseEnity;
 import com.health.life.model.view.BaseViewInterface;
 import com.health.life.presenter.BasePresenter;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import rx.Observable;
 
 /**
  * Created by ligang967 on 16/2/23.
@@ -34,8 +30,6 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
     private int id;
 
     private String title;
-
-    private BasePresenter  basePresenter;
 
     private ListView listView;
 
@@ -76,7 +70,6 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
 
         id = getArguments().getInt("id");
 
-        basePresenter = new BasePresenter<BookListInfoOutput>(this , this);
 
     }
 
@@ -103,12 +96,8 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
     @Override
     public void onResume() {
         super.onResume();
-        this.basePresenter.getRequestResult(new DoRequest<BookListInfoOutput>() {
-            @Override
-            public Observable<BookListInfoOutput> doRequest(BaseEnity baseEnity) {
-                return baseEnity.getListById(new BookListInfoInput(id, 10, 1));
-            }
-        }  ,true);
+
+        BasePresenter.getInstance().setBookListViewInterface(this).setInput(new BookListInfoInput(id , 10 , 1)).load();
     }
 
     @Override

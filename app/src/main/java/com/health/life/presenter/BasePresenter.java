@@ -1,13 +1,12 @@
 package com.health.life.presenter;
 
-import com.health.life.interfaces.DoRequest;
 import com.health.life.interfaces.RequestListener;
+import com.health.life.model.bean.input.BaseBeanInput;
 import com.health.life.model.bean.output.BaseBeanOutput;
 import com.health.life.model.enity.BaseEnity;
 import com.health.life.model.view.BaseViewInterface;
 import com.health.life.utils.RestUtils;
 
-import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -15,50 +14,69 @@ import rx.schedulers.Schedulers;
 /**
  * Created by ligang967 on 16/2/23.
  */
-public class BasePresenter<T extends BaseBeanOutput>{
+public class BasePresenter<T extends BaseBeanOutput> {
 
     private BaseViewInterface bookListViewInterface;
-    private RequestListener listener;
-    private Observable observable;
 
-    public BasePresenter(BaseViewInterface baseViewInterface , RequestListener ls) {
-        this.bookListViewInterface = baseViewInterface;
-        this.listener = ls;
+    private static BasePresenter basePresenter = null;
+
+    private static BaseEnity enity = null;
+
+    private BaseBeanInput input;
+
+    private RequestListener requestListener;
+
+    private BasePresenter() {
+
+
+        if (enity == null) {
+            enity = RestUtils.createApi(BaseEnity.class);
+        }
     }
 
-    /**
-     * 有数据处理新建 presenter时候使用
-     * @param doRequest
-     * @return
-     */
-    public Observable<T> getObservable(DoRequest doRequest){
-        if(observable == null) {
-            BaseEnity eEnity = RestUtils.createApi(BaseEnity.class);
-            observable = doRequest.doRequest(eEnity);
+    public static BasePresenter getInstance() {
+        if (basePresenter == null) {
+            basePresenter = new BasePresenter();
         }
-        return observable;
+        return basePresenter;
     }
 
-    /**
-     * 默认使用这个方法获取data
-     * @param doRequest
-     * @param showDialog
-     */
-    public void  getRequestResult(DoRequest doRequest , boolean showDialog){
-        if(showDialog) {
-            listener.showProgressDialog();
+
+    public BasePresenter setBookListViewInterface(BaseViewInterface bookListViewInterface) {
+        this.bookListViewInterface = bookListViewInterface;
+        return basePresenter;
+    }
+
+
+    public BasePresenter setInput(BaseBeanInput input) {
+        this.input = input;
+        return basePresenter;
+    }
+
+    public BasePresenter setRequestListener(RequestListener requestListener) {
+        this.requestListener = requestListener;
+        return basePresenter;
+    }
+
+    public void load() {
+        if (input.isShowDialog()&&this.requestListener!=null) {
+            this.requestListener.showProgressDialog();
         }
-        getObservable(doRequest).observeOn(AndroidSchedulers.mainThread())
+        input.getData(enity).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<T>() {
                     @Override
                     public void onCompleted() {
-                        listener.hideProgressDialog();
+                        if (input.isShowDialog()&&requestListener!=null) {
+                            requestListener.hideProgressDialog();
+                        }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        listener.hideProgressDialog();
+                        if (input.isShowDialog()&&requestListener!=null) {
+                            requestListener.hideProgressDialog();
+                        }
                         bookListViewInterface.showError(e.getMessage());
                     }
 
