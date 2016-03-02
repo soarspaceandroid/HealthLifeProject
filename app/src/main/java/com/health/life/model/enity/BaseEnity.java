@@ -17,12 +17,17 @@ import rx.Observable;
  */
 public interface BaseEnity
 {
+
+    /**健康 接口  start**/
     @GET("/api/book/classify")
     public Observable<BookKindListBeanOutput> getClassify();
 
     @POST("/api/info/list")
     public Observable<BookListInfoOutput> getListById(@Body BookListInfoInput input);
 
+
+
+    /**生活 接口  start**/
 
     @POST("/api/cook/classify")
     public Observable<CookClassfyOutput> getCookClassfy(@Body CookClassifyInput input);

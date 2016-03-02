@@ -41,4 +41,11 @@
         <item name="android:textSize">@dimen/menu_text_size</item>
     </style>
 
+
+    <!--健康start-->
+
+
+
+    <!--生活start-->
+
 </resources>
