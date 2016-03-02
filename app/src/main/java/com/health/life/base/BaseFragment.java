@@ -3,14 +3,24 @@ package com.health.life.base;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import com.health.life.interfaces.RequestListener;
 import com.health.life.utils.AbLoadDialogFragment;
 
 
-public class BaseFragment extends android.support.v4.app.Fragment implements RequestListener{
+public abstract class BaseFragment extends android.support.v4.app.Fragment implements RequestListener{
 
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        requestData();
+    }
+
+
+    protected  abstract void  requestData();
 
     /**
      * dialog tag

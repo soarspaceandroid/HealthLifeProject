@@ -36,4 +36,8 @@ public class HealthFragment extends BaseFragment implements BaseViewInterface<Bo
 
     }
 
+    @Override
+    protected void requestData() {
+
+    }
 }

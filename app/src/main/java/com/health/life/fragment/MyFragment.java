@@ -22,7 +22,6 @@ public class MyFragment extends BaseFragment implements BaseViewInterface<BookLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my_fragment, null);
-
         return view;
     }
 
@@ -35,4 +34,8 @@ public class MyFragment extends BaseFragment implements BaseViewInterface<BookLi
 
     }
 
+    @Override
+    protected void requestData() {
+
+    }
 }

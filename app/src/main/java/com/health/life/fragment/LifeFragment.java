@@ -24,7 +24,6 @@ public class LifeFragment extends BaseFragment implements BaseViewInterface<Cook
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.life_fragment, null);
-        requestData();
         return view;
     }
 
@@ -38,9 +37,10 @@ public class LifeFragment extends BaseFragment implements BaseViewInterface<Cook
 
     }
 
+    @Override
     protected void requestData() {
-
         BasePresenter.getInstance().setBaseViewInterface(this).setRequestListener(this).setInput(new CookClassifyInput(1)).load();
-
     }
+
+
 }
