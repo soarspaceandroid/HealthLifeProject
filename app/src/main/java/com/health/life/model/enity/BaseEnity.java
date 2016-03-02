@@ -24,7 +24,7 @@ public interface BaseEnity
     public Observable<BookListInfoOutput> getListById(@Body BookListInfoInput input);
 
 
-    @GET("api/cook/classify")
+    @POST("/api/cook/classify")
     public Observable<CookClassfyOutput> getCookClassfy(@Body CookClassifyInput input);
 
 }
