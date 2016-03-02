@@ -48,7 +48,6 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
         fragmentManager = getSupportFragmentManager();
         initBaseView();
         initBaseData();
-        requestData();
 
     }
 
@@ -139,6 +138,7 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
 
     @Override
     protected void onStart() {
+        requestData();
         super.onStart();
     }
 

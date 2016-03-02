@@ -33,8 +33,6 @@ public class MainActivity extends BaseActivity{
         showLeftBack(false);   // 主页不显示返回按钮
         showRightMenu(true);
         setSwipeBackEnable(false); // 主页面tab不滑动返回
-
-
         initTabView();
 
     }
@@ -53,15 +51,6 @@ public class MainActivity extends BaseActivity{
 
         mCustomTabView = (CustomTabView)findViewById(R.id.custom_tab_view);
     }
-
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
-
 
 
 
