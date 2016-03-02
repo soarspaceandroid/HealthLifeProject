@@ -93,7 +93,12 @@ public class TabsFragmentAdapter extends FragmentPagerAdapter implements EasySli
      */
     @Override
     public int getCount() {
-        return this.titles.size();
+
+        if (this.titles!=null) {
+            return this.titles.size();
+        }else {
+            return 0;
+        }
     }
 
 }

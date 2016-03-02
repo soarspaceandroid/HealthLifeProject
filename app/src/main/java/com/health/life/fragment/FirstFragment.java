@@ -33,6 +33,10 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
 
     private ListView listView;
 
+    private BookListInfoInput infoInput;
+
+    private BasePresenter basePresenter;
+
 
     public static FirstFragment getInstance(String title,int id) {
         if (instance == null) {
@@ -71,6 +75,17 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
         id = getArguments().getInt("id");
 
 
+        infoInput = new BookListInfoInput(1,20,id);
+
+        infoInput.setShowDialog(false);
+
+        basePresenter=new BasePresenter().setBaseViewInterface(this).setRequestListener(this);
+
+    }
+
+    @Override
+    protected String currentTitle() {
+        return "first";
     }
 
     @Override
@@ -97,7 +112,7 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
     public void onResume() {
         super.onResume();
 
-        BasePresenter.getInstance().setBaseViewInterface(this).setInput(new BookListInfoInput(id , 10 , 1)).load();
+
     }
 
     @Override
@@ -110,4 +125,11 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
 
     }
 
+    @Override
+    protected void requestData() {
+
+
+
+        basePresenter.setInput(infoInput).load();
+    }
 }

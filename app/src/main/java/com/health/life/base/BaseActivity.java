@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,11 +49,10 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
         fragmentManager = getSupportFragmentManager();
         initBaseView();
         initBaseData();
-        requestData();
 
     }
 
-    /**描述当前页面的title--便于友盟统计*/
+    /**set title*/
     protected abstract String currActivityName();
 
 
@@ -84,6 +84,17 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
         }
     };
 
+
+    /**
+     * set title for fragment
+     * @param title
+     */
+    public void setTitle(String title){
+        if(TextUtils.isEmpty(title)){
+            return ;
+        }
+        topTitleView.setTitle(title);
+    }
     /***
      *  如果是文章 健康详情  显示菜单可供用户操作  default gone
      */
@@ -139,6 +150,7 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
 
     @Override
     protected void onStart() {
+        requestData();
         super.onStart();
     }
 
@@ -212,6 +224,9 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
         removeDialog(this);
     }
 
+    /**
+     * 右上角菜单初始化
+     */
     private void initMenuFragment() {
         MenuParams menuParams = new MenuParams();
         menuParams.setActionBarSize((int) getResources().getDimension(R.dimen.title_bar_height));
@@ -221,7 +236,9 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
         mMenuDialogFragment.setItemClickListener(this);
         mMenuDialogFragment.setItemLongClickListener(this);
     }
-
+    /**
+     * 右上角菜单数据
+     */
     private List<MenuObject> getMenuObjects() {
 
         List<MenuObject> menuObjects = new ArrayList<>();
@@ -253,6 +270,13 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
         return menuObjects;
     }
 
+    /**
+     *
+     * 右上角菜单点击事件
+     *
+     * @param clickedView
+     * @param position
+     */
     @Override
     public void onMenuItemClick(View clickedView, int position) {
 

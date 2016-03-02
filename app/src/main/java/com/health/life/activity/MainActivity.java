@@ -29,12 +29,10 @@ public class MainActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.initViews();
+        initViews();
         showLeftBack(false);   // 主页不显示返回按钮
         showRightMenu(true);
         setSwipeBackEnable(false); // 主页面tab不滑动返回
-
-
         initTabView();
 
     }
@@ -50,21 +48,13 @@ public class MainActivity extends BaseActivity{
     }
 
     private void initViews(){
-
         mCustomTabView = (CustomTabView)findViewById(R.id.custom_tab_view);
     }
 
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
-
-
-
-
+    /**
+     * init tab view
+     */
     private void initTabView(){
         listFragment.add(new HealthFragment());
         listFragment.add(new LifeFragment());
@@ -87,7 +77,13 @@ public class MainActivity extends BaseActivity{
     }
 
 
-
+    /**
+     * change fragment
+     * @param mFragment
+     * @param selectedPage
+     * @param currPage
+     * @param isAnim
+     */
     protected void switchFragment(Fragment mFragment, int selectedPage, int currPage, boolean isAnim) {
         Fragment orginFragment = getSupportFragmentManager().findFragmentByTag(mFragmentTag[selectedPage]);
         FragmentTransaction ft = getFragmentTransaction(isAnim, selectedPage, currPage);
@@ -110,6 +106,13 @@ public class MainActivity extends BaseActivity{
     }
 
 
+    /**
+     * get transaction
+     * @param isAnimation
+     * @param selectedPage
+     * @param currPage
+     * @return
+     */
     private FragmentTransaction getFragmentTransaction(boolean isAnimation , int selectedPage , int currPage){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (isAnimation) {

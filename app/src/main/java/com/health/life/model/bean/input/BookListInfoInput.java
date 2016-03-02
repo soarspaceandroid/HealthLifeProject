@@ -47,7 +47,7 @@ public class BookListInfoInput extends BaseBeanInput {
     @Override
     public Observable<BookListInfoOutput> getData(BaseEnity baseEnity) {
 
-        Observable<BookListInfoOutput> observable = baseEnity.getListById(this);
+        Observable<BookListInfoOutput> observable = baseEnity.getListById(this.id,this.page,this.rows);
 
         return observable;
     }

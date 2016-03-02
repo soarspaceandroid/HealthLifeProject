@@ -18,7 +18,6 @@ public class BasePresenter<T extends BaseBeanOutput> {
 
     private BaseViewInterface baseViewInterface;
 
-    private static BasePresenter basePresenter = null;
 
     private static BaseEnity enity = null;
 
@@ -26,7 +25,7 @@ public class BasePresenter<T extends BaseBeanOutput> {
 
     private RequestListener requestListener;
 
-    private BasePresenter() {
+    public BasePresenter() {
 
 
         if (enity == null) {
@@ -34,28 +33,22 @@ public class BasePresenter<T extends BaseBeanOutput> {
         }
     }
 
-    public static BasePresenter getInstance() {
-        if (basePresenter == null) {
-            basePresenter = new BasePresenter();
-        }
-        return basePresenter;
-    }
 
 
     public BasePresenter setBaseViewInterface(BaseViewInterface baseViewInterface) {
         this.baseViewInterface = baseViewInterface;
-        return basePresenter;
+        return this;
     }
 
 
     public BasePresenter setInput(BaseBeanInput input) {
         this.input = input;
-        return basePresenter;
+        return this;
     }
 
     public BasePresenter setRequestListener(RequestListener requestListener) {
         this.requestListener = requestListener;
-        return basePresenter;
+        return this;
     }
 
     public void load() {
@@ -83,6 +76,10 @@ public class BasePresenter<T extends BaseBeanOutput> {
                     @Override
                     public void onNext(T t) {
                         baseViewInterface.updateView(t);
+
+                        if (input.isShowDialog()&&requestListener!=null) {
+                            requestListener.hideProgressDialog();
+                        }
                     }
                 });
 

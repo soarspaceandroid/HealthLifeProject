@@ -19,4 +19,12 @@ public class Config {
     public static File CACHAE_DIR = null;
 
     public static String BASE_IMAGE_URL = "http://tnfs.tngou.net/image";
+
+
+    /**健康 接口  start**/
+
+
+
+
+    /**生活 接口  start**/
 }

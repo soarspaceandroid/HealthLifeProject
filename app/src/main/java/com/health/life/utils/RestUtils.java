@@ -36,6 +36,7 @@ public class RestUtils {
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .client(OkHttpUtils.getInstance())
+                    .validateEagerly()
                     .build();
         }
         else {

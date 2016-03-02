@@ -3,14 +3,49 @@ package com.health.life.base;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.animation.Animation;
 
 import com.health.life.interfaces.RequestListener;
 import com.health.life.utils.AbLoadDialogFragment;
 
 
-public class BaseFragment extends android.support.v4.app.Fragment implements RequestListener{
+public abstract class BaseFragment extends android.support.v4.app.Fragment implements RequestListener{
 
+
+    /**
+     * do the request for fragment
+     * @param savedInstanceState
+     */
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        requestData();
+    }
+
+    /**
+     * use to set fragment's title
+     * @param transit
+     * @param enter
+     * @param nextAnim
+     * @return
+     */
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        if(enter){
+            ((BaseActivity)getActivity()).setTitle(currentTitle());
+        }
+        return super.onCreateAnimation(transit, enter, nextAnim);
+    }
+
+    /**
+     * 如果 当前的fragment不需要改变标题  ,返回 null 或是 "" ,默认重写返回 null  . 无需再管
+     * @return
+     */
+    protected abstract String currentTitle();
+
+    protected  abstract void  requestData();
 
     /**
      * dialog tag

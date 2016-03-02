@@ -19,12 +19,19 @@ import com.health.life.presenter.BasePresenter;
  */
 public class LifeFragment extends BaseFragment implements BaseViewInterface<CookClassfyOutput> {
 
+    private  BasePresenter basePresenter;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        basePresenter=new BasePresenter().setBaseViewInterface(this).setRequestListener(this);
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.life_fragment, null);
-        requestData();
         return view;
     }
 
@@ -38,9 +45,13 @@ public class LifeFragment extends BaseFragment implements BaseViewInterface<Cook
 
     }
 
+    @Override
     protected void requestData() {
+        basePresenter.setInput(new CookClassifyInput(1)).load();
+    }
 
-        BasePresenter.getInstance().setBaseViewInterface(this).setRequestListener(this).setInput(new CookClassifyInput(1)).load();
-
+    @Override
+    protected String currentTitle() {
+        return "生活";
     }
 }

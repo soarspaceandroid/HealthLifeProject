@@ -9,7 +9,7 @@ import rx.Observable;
  */
 public class BaseBeanInput {
 
-    private boolean showDialog = false;
+    private boolean showDialog = true;
 
     public Observable getData(BaseEnity baseEnity){
         return null;
