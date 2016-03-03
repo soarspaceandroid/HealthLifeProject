@@ -3,13 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<com.health.life.view.pulltorefresh.PullToRefreshListView
+    android:id="@+id/pullrefreshlistview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+</com.health.life.view.pulltorefresh.PullToRefreshListView>
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/color_message_back"
-        android:text="Life fragment"
-        android:textSize="30dp"/>
 
 </RelativeLayout>
