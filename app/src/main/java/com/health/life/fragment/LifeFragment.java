@@ -2,23 +2,20 @@ package com.health.life.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import android.support.v4.view.ViewPager;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.health.life.R;
-import com.health.life.adapter.BaseAdapterTools.BaseAdapterHelper;
-import com.health.life.adapter.BaseAdapterTools.QuickAdapter;
+import com.health.life.adapter.CookClassfyAdapter;
 import com.health.life.base.BaseFragment;
 import com.health.life.model.bean.input.CookClassifyInput;
 import com.health.life.model.bean.output.CookClassfyOutput;
 import com.health.life.model.view.BaseViewInterface;
 import com.health.life.presenter.BasePresenter;
-import com.health.life.view.pulltorefresh.ILoadingLayout;
-import com.health.life.view.pulltorefresh.PullToRefreshBase;
-import com.health.life.view.pulltorefresh.PullToRefreshListView;
+import com.health.life.view.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +26,10 @@ import java.util.List;
 public class LifeFragment extends BaseFragment implements BaseViewInterface<CookClassfyOutput> {
 
     private  BasePresenter basePresenter;
-    private PullToRefreshListView mListView ;
-    private List<String> data = new ArrayList<>();
-    private QuickAdapter<String> adapter;
+    private PagerSlidingTabStrip mTabView ;
+    private ViewPager mViewPager;
+    private CookClassfyAdapter adapter = null;
+    private List<CookClassfyOutput.TngouEntity> outPut = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,88 +46,25 @@ public class LifeFragment extends BaseFragment implements BaseViewInterface<Cook
     }
 
     private void initView(View view){
-        mListView =(PullToRefreshListView)view.findViewById(R.id.pullrefreshlistview);
-        mListView.setMode(PullToRefreshBase.Mode.BOTH); //  上下都可以刷
-        ILoadingLayout footLabels = mListView.getLoadingLayoutProxy(
-                false, true);
-        footLabels.setPullLabel("上拉加载更多");
-        footLabels.setRefreshingLabel("加载中...");
-        footLabels.setReleaseLabel("释放加载更多");
-
-
-        data.add("test1");
-        data.add("test2");
-        data.add("test3");
-        data.add("test4");
-        data.add("test5");
-        data.add("test6");
-        data.add("test7");
-        data.add("test8");
-        data.add("test9");
-        data.add("test1");
-        data.add("test2");
-        data.add("test3");
-        data.add("test4");
-        data.add("test5");
-        data.add("test6");
-        data.add("test7");
-        data.add("test8");
-        data.add("test9");
-
-        adapter = new QuickAdapter<String>(getActivity(), R.layout.item_life_classfy, data) {
-            @Override
-            protected void convert(BaseAdapterHelper helper, String item) {
-                helper.setText(R.id.life_tv, item);
-            }
-        };
-        mListView.setAdapter(adapter);
-        mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-
-            }
-
-            @Override
-            public void onPullUpToRefresh(final PullToRefreshBase<ListView> refreshView) {
-
-                mListView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mListView.setRefreshing();
-                    }
-                }, 2000);
-
-
-                mListView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshView.onRefreshComplete();
-                    }
-                }, 2000);
-
-                mListView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        data.add("test4");
-                        data.add("test5");
-                        data.add("test6");
-                        data.add("test7");
-                        data.add("test8");
-                        data.add("test9");
-                        Log.e("soar", "list.sze ==- " + data.size());
-                        adapter.notifyDataSetChanged();
-                    }
-                }, 2000);
-
-
-            }
-        });
-
+        mTabView = (PagerSlidingTabStrip)view.findViewById(R.id.life_tab);
+        mViewPager = (ViewPager)view.findViewById(R.id.pager);
+        adapter = new CookClassfyAdapter(getFragmentManager(), outPut);
+        mViewPager.setAdapter(adapter);
+        final int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources()
+                .getDisplayMetrics());
+        mViewPager.setPageMargin(pageMargin);
+        mTabView.setViewPager(mViewPager);
+        mTabView.setScrollOffset(getResources().getDisplayMetrics().widthPixels/2 - 80); //  Tab 居中
 
     }
+
     @Override
-    public void updateView(CookClassfyOutput bookKindListBeanOutput) {
-            Log.e("soar", "test --- " + bookKindListBeanOutput.tngou.get(0).name);
+    public void updateView(CookClassfyOutput cookClassfyOutput) {
+        outPut.clear();
+        outPut.addAll(cookClassfyOutput.tngou);
+        adapter.notifyDataSetChanged();
+        mTabView.notifyDataSetChanged();
+
     }
 
     @Override

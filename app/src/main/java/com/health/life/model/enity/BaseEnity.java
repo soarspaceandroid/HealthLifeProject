@@ -2,9 +2,11 @@ package com.health.life.model.enity;
 
 
 import com.health.life.model.bean.input.CookClassifyInput;
+import com.health.life.model.bean.input.CookClassifyListInfoInput;
 import com.health.life.model.bean.output.BookKindListBeanOutput;
 import com.health.life.model.bean.output.BookListInfoOutput;
 import com.health.life.model.bean.output.CookClassfyOutput;
+import com.health.life.model.bean.output.CookClassifyListInfoOutput;
 
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -31,5 +33,9 @@ public interface BaseEnity
 
     @POST("/api/cook/classify")
     public Observable<CookClassfyOutput> getCookClassfy(@Body CookClassifyInput input);
+
+
+    @POST("/api/cook/list")
+    public Observable<CookClassifyListInfoOutput> getCookListInfo(@Body CookClassifyListInfoInput input);
 
 }
