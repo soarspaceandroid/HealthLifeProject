@@ -1,5 +1,7 @@
 package com.health.life.presenter;
 
+import android.util.Log;
+
 import com.health.life.interfaces.RequestListener;
 import com.health.life.model.bean.input.BaseBeanInput;
 import com.health.life.model.bean.output.BaseBeanOutput;
@@ -15,6 +17,7 @@ import rx.schedulers.Schedulers;
  * Created by ligang967 on 16/2/23.
  */
 public class BasePresenter<T extends BaseBeanOutput> {
+    private final static String TAG = "BasePresenter";
 
     private BaseViewInterface baseViewInterface;
 
@@ -55,11 +58,13 @@ public class BasePresenter<T extends BaseBeanOutput> {
         if (input.isShowDialog()&&this.requestListener!=null) {
             this.requestListener.showProgressDialog();
         }
+        Log.d(TAG , "start load");
         input.getData(enity).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<T>() {
                     @Override
                     public void onCompleted() {
+                        Log.d(TAG , "load complete  ");
                         if (input.isShowDialog()&&requestListener!=null) {
                             requestListener.hideProgressDialog();
                         }
@@ -67,6 +72,7 @@ public class BasePresenter<T extends BaseBeanOutput> {
 
                     @Override
                     public void onError(Throwable e) {
+                        Log.d(TAG , "load error  ");
                         if (input.isShowDialog()&&requestListener!=null) {
                             requestListener.hideProgressDialog();
                         }
@@ -75,6 +81,7 @@ public class BasePresenter<T extends BaseBeanOutput> {
 
                     @Override
                     public void onNext(T t) {
+                        Log.d(TAG , "load onnext  "+t.getClass());
                         baseViewInterface.updateView(t);
 
                         if (input.isShowDialog()&&requestListener!=null) {

@@ -1,7 +1,6 @@
 package com.health.life.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +21,11 @@ import java.util.List;
  */
 public class CookListAdapter extends BaseAdapter {
 
-    private List<CookClassifyListInfoOutput.Cook> tngou;
+    private List<CookClassifyListInfoOutput.TngouEntity> tngou;
 
     private Context context;
 
-    public CookListAdapter(List<CookClassifyListInfoOutput.Cook> tngou, Context context) {
+    public CookListAdapter(List<CookClassifyListInfoOutput.TngouEntity> tngou, Context context) {
         this.tngou = tngou;
         this.context = context;
     }
@@ -58,7 +57,7 @@ public class CookListAdapter extends BaseAdapter {
 
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.booklist_adater, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.cooklist_adater, null);
             viewHolder.des = (TextView) convertView.findViewById(R.id.des);
             viewHolder.name = (TextView) convertView.findViewById(R.id.name);
             viewHolder.image = (ImageView) convertView.findViewById(R.id.image);
@@ -66,14 +65,9 @@ public class CookListAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
-        CookClassifyListInfoOutput.Cook entity = tngou.get(position);
-
-        Log.e("soar" , "name -- "+entity.name);
+        CookClassifyListInfoOutput.TngouEntity entity = tngou.get(position);
         viewHolder.name.setText(entity.name + "");
-
         viewHolder.des.setText(entity.food + "");
-
         Picasso.with(context)
                 .load(Config.BASE_IMAGE_URL+entity.img)
 //                .placeholder(R.drawable.contact_picture_placeholder)

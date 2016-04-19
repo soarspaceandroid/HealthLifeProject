@@ -2,7 +2,6 @@ package com.health.life.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,7 +72,6 @@ public class CookDisplayFragment extends BaseFragment implements BaseViewInterfa
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         id = getArguments().getInt("id");
-        Log.e("soar" , "request id "+id);
         infoInput = new CookClassifyListInfoInput(1,20,id);
         infoInput.setShowDialog(false);
         basePresenter=new BasePresenter().setBaseViewInterface(this).setRequestListener(this);
@@ -114,7 +112,6 @@ public class CookDisplayFragment extends BaseFragment implements BaseViewInterfa
 
     @Override
     public void updateView(CookClassifyListInfoOutput cookClassifyListInfoOutput) {
-        Log.e("soar" , "updat ---- "+cookClassifyListInfoOutput.tngou.get(0).food);
         listView.setAdapter(new CookListAdapter(cookClassifyListInfoOutput.tngou , getActivity()));
     }
 

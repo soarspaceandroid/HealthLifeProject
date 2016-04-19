@@ -30,8 +30,6 @@ public class MainActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
-        showLeftBack(false);   // 主页不显示返回按钮
-        showRightMenu(true);
         setSwipeBackEnable(false); // 主页面tab不滑动返回
         initTabView();
 

@@ -18,6 +18,6 @@ public class CookClassifyInput extends BaseBeanInput{
 
     @Override
     public Observable getData(BaseEnity baseEnity) {
-        return baseEnity.getCookClassfy(this);
+        return baseEnity.getCookClassfy(id);
     }
 }

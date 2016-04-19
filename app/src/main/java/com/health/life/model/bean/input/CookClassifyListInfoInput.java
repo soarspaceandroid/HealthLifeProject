@@ -21,6 +21,6 @@ public class CookClassifyListInfoInput extends BaseBeanInput{
     }
     @Override
     public Observable getData(BaseEnity baseEnity) {
-        return baseEnity.getCookListInfo(this);
+        return baseEnity.getCookListInfo(id , page , rows);
     }
 }

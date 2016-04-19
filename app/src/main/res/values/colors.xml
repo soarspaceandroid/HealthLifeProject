@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#00000000</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorProgressBack">#20000000</color>
@@ -25,6 +25,7 @@
 
     <!--生活start-->
     <color name="background_tab_pressed">#00000000</color>
+    <color name="color_2f2f2f">#2f2f2f</color>
 
 
 </resources>

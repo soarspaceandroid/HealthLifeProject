@@ -9,7 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +19,8 @@ import com.health.life.R;
 import com.health.life.activity.swipeback.SwipeBackActivity;
 import com.health.life.interfaces.RequestListener;
 import com.health.life.utils.AbLoadDialogFragment;
-import com.health.life.utils.SystemBarTintManager;
-import com.health.life.view.TopTitleView;
+import com.health.life.utils.StatusBarCompat;
+import com.health.life.view.AppBar;
 import com.health.life.view.contextmenu.lib.ContextMenuDialogFragment;
 import com.health.life.view.contextmenu.lib.MenuObject;
 import com.health.life.view.contextmenu.lib.MenuParams;
@@ -35,7 +35,7 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
 
 
     private FrameLayout content;
-    public TopTitleView topTitleView = null;
+    private AppBar appBar;
     private FragmentManager fragmentManager ;
     private ContextMenuDialogFragment mMenuDialogFragment;
 
@@ -43,9 +43,6 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_root);
-        getWindow().setLayout(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
-        SystemBarTintManager tintManager = new SystemBarTintManager(this);
-        tintManager.setTintColor(R.color.color_539728); //  set status bar color
         fragmentManager = getSupportFragmentManager();
         initBaseView();
         initBaseData();
@@ -69,57 +66,64 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
 
     private void initBaseView() {
         content = (FrameLayout) findViewById(R.id.root_container);
-        topTitleView = (TopTitleView) findViewById(R.id.topTitleView);
-        topTitleView.getRootLeftRl().setOnClickListener(onLeftClickListener);
-        topTitleView.getRootRightRl().setOnClickListener(onRightClickListener);
-        topTitleView.setTitle(currActivityName());
+        appBar = (AppBar)findViewById(R.id.app_bar);
+        controlAppBar(appBar);
+        setAppBarHeight();
+        appBar.setSupportActionBar(this);
+        StatusBarCompat.compat(this);
+        appBar.setBackImage(R.mipmap.back);
+        appBar.setImageBackListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        appBar.setTitle(currActivityName());
         initMenuFragment();
+        appBar.setRightImage(R.mipmap.menu);
+        appBar.setImageRightListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMenuDialogFragment.show(fragmentManager, ContextMenuDialogFragment.TAG);
+            }
+        });
     }
 
-    private View.OnClickListener onLeftClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            //go back
-            finish();
-        }
-    };
 
-
-    /**
-     * set title for fragment
-     * @param title
-     */
     public void setTitle(String title){
-        if(TextUtils.isEmpty(title)){
-            return ;
-        }
-        topTitleView.setTitle(title);
+        appBar.setTitle(title);
     }
-    /***
-     *  如果是文章 健康详情  显示菜单可供用户操作  default gone
-     */
-    public void showRightMenu(boolean show){
-        topTitleView.getRootRightRl().setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
 
     /**
-     * 显示返回按钮  default 显示
-     * @param show
+     * set app bar height
      */
-    public void showLeftBack(boolean show){
-        topTitleView.getRootLeftRl().setVisibility(show ? View.VISIBLE : View.GONE);
+    private void setAppBarHeight(){
+        TypedValue tv = new TypedValue();
+        int actionBarHeight = 0;
+        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+        }
+        ViewGroup.LayoutParams params = appBar.getLayoutParams();
+        params.height  = StatusBarCompat.getStatusBarHeight(this) + actionBarHeight;
+        appBar.setLayoutParams(params);
     }
 
-    private View.OnClickListener onRightClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            mMenuDialogFragment.show(fragmentManager, ContextMenuDialogFragment.TAG);
-        }
-    };
-    public TopTitleView getTopTitleView(){
-        return topTitleView;
+    /**
+     *  control appbar ,  如果需要修改appbar 请重写该方法
+     * @param appbar
+     */
+    public void controlAppBar(AppBar appbar){
+
     }
+
+    /**
+     * get appbar
+     * @return
+     */
+    public AppBar getAppBar(){
+        return appBar;
+    }
+
 
     @Override
     public void setContentView(int layoutResID) {
@@ -229,7 +233,12 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
      */
     private void initMenuFragment() {
         MenuParams menuParams = new MenuParams();
-        menuParams.setActionBarSize((int) getResources().getDimension(R.dimen.title_bar_height));
+        TypedValue tv = new TypedValue();
+        int actionBarHeight = 0;
+        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+        }
+        menuParams.setActionBarSize(actionBarHeight);
         menuParams.setMenuObjects(getMenuObjects());
         menuParams.setClosableOutside(true);
         mMenuDialogFragment = ContextMenuDialogFragment.newInstance(menuParams);

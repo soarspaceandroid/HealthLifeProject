@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
 import android.view.animation.Animation;
 
 import com.health.life.interfaces.RequestListener;
@@ -33,8 +34,8 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment imple
      */
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        if(enter){
-            ((BaseActivity)getActivity()).setTitle(currentTitle());
+        if(enter && !TextUtils.isEmpty(currentTitle())){
+            ((BaseActivity) getActivity()).setTitle(currentTitle());
         }
         return super.onCreateAnimation(transit, enter, nextAnim);
     }

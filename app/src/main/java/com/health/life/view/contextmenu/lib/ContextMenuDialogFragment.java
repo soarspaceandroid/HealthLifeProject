@@ -6,13 +6,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.DialogFragment;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.health.life.R;
+import com.health.life.utils.StatusBarCompat;
 import com.health.life.view.contextmenu.lib.interfaces.OnItemClickListener;
 import com.health.life.view.contextmenu.lib.interfaces.OnItemLongClickListener;
 import com.health.life.view.contextmenu.lib.interfaces.OnMenuItemClickListener;
@@ -95,10 +98,21 @@ public class ContextMenuDialogFragment extends DialogFragment implements OnItemC
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_menu, container, false);
+
         rootView.setFitsSystemWindows(mMenuParams.isFitsSystemWindow());
         ((ViewGroup) rootView).setClipToPadding(mMenuParams.isClipToPadding());
 
+        RelativeLayout layout = (RelativeLayout)rootView.findViewById(R.id.root);
+        RelativeLayout.LayoutParams params =(RelativeLayout.LayoutParams)layout .getLayoutParams();
+        TypedValue tv = new TypedValue();
+        int actionBarHeight = 0;
+        if (getActivity().getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+        }
+        params.topMargin = StatusBarCompat.getStatusBarHeight(getActivity());// + actionBarHeight;
+        layout.setLayoutParams(params);
         initViews(rootView);
+
         getDialog().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         initDropDownMenuAdapter();
         new Handler().postDelayed(new Runnable() {

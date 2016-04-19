@@ -1,11 +1,11 @@
 package com.health.life.activity.swipeback;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 
-public class SwipeBackActivity extends FragmentActivity implements
+public class SwipeBackActivity extends AppCompatActivity implements
 		SwipeBackActivityBase {
 	private SwipeBackActivityHelper mHelper;
 	

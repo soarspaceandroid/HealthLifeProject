@@ -85,7 +85,7 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
 
     @Override
     protected String currentTitle() {
-        return "first";
+        return "";
     }
 
     @Override
