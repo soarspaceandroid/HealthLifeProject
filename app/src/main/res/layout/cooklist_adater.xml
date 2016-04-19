@@ -13,7 +13,8 @@
         android:src="@drawable/content_films"
         android:scaleType="fitXY"
         android:layout_margin="2dp"
-        android:layout_height="78dp" />
+        android:layout_height="78dp"
+        android:transitionName="shareview"/>
     <LinearLayout
         android:layout_marginLeft="102dp"
         android:layout_width="match_parent"
@@ -40,7 +41,6 @@
             android:maxLines="3"
             android:ellipsize="end"
             android:text="jieshao"
-            android:textStyle="italic"
             android:id="@+id/des"/>
     </LinearLayout>
 

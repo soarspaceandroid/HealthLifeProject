@@ -1,18 +1,10 @@
 [
     {
-        "merged": "D:\\project\\healthlife\\HealthLifeProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\vpi__light_theme.xml",
-        "source": "D:\\project\\healthlife\\HealthLifeProject\\library\\build\\intermediates\\bundles\\debug\\res\\color\\vpi__light_theme.xml"
-    },
-    {
         "merged": "D:\\project\\healthlife\\HealthLifeProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\vpi__dark_theme.xml",
         "source": "D:\\project\\healthlife\\HealthLifeProject\\library\\build\\intermediates\\bundles\\debug\\res\\color\\vpi__dark_theme.xml"
     },
     {
-        "merged": "D:\\Users\\ligang967\\Documents\\workspace_ss\\HealthLifeProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\vpi__light_theme.xml",
-        "source": "D:\\Users\\ligang967\\Documents\\workspace_ss\\HealthLifeProject\\library\\build\\intermediates\\bundles\\debug\\res\\color\\vpi__light_theme.xml"
-    },
-    {
-        "merged": "D:\\Users\\ligang967\\Documents\\workspace_ss\\HealthLifeProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\vpi__dark_theme.xml",
-        "source": "D:\\Users\\ligang967\\Documents\\workspace_ss\\HealthLifeProject\\library\\build\\intermediates\\bundles\\debug\\res\\color\\vpi__dark_theme.xml"
+        "merged": "D:\\project\\healthlife\\HealthLifeProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\color\\vpi__light_theme.xml",
+        "source": "D:\\project\\healthlife\\HealthLifeProject\\library\\build\\intermediates\\bundles\\debug\\res\\color\\vpi__light_theme.xml"
     }
 ]

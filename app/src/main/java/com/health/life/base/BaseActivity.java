@@ -75,7 +75,7 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
         appBar.setImageBackListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
             }
         });
         appBar.setTitle(currActivityName());

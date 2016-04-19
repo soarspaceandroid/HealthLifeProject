@@ -7,6 +7,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.health.life.R;
 import com.health.life.adapter.CookClassfyAdapter;
@@ -20,41 +21,47 @@ import com.health.life.view.PagerSlidingTabStrip;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by ligang967 on 16/2/23.
  */
 public class LifeFragment extends BaseFragment implements BaseViewInterface<CookClassfyOutput> {
 
-    private  BasePresenter basePresenter;
-    private PagerSlidingTabStrip mTabView ;
-    private ViewPager mViewPager;
+    @Bind(R.id.life_tab)
+    PagerSlidingTabStrip lifeTab;
+    @Bind(R.id.tab_parent)
+    LinearLayout tabParent;
+    @Bind(R.id.pager)
+    ViewPager pager;
+    private BasePresenter basePresenter;
     private CookClassfyAdapter adapter = null;
     private List<CookClassfyOutput.TngouEntity> outPut = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        basePresenter=new BasePresenter().setBaseViewInterface(this).setRequestListener(this);
+        basePresenter = new BasePresenter().setBaseViewInterface(this).setRequestListener(this);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.life_fragment, null);
+        ButterKnife.bind(this, view);
         initView(view);
         return view;
     }
 
-    private void initView(View view){
-        mTabView = (PagerSlidingTabStrip)view.findViewById(R.id.life_tab);
-        mViewPager = (ViewPager)view.findViewById(R.id.pager);
+    private void initView(View view) {
         adapter = new CookClassfyAdapter(getFragmentManager(), outPut);
-        mViewPager.setAdapter(adapter);
+        pager.setAdapter(adapter);
         final int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources()
                 .getDisplayMetrics());
-        mViewPager.setPageMargin(pageMargin);
-        mTabView.setViewPager(mViewPager);
-        mTabView.setScrollOffset(getResources().getDisplayMetrics().widthPixels/2 - 80); //  Tab 居中
+        pager.setPageMargin(pageMargin);
+        lifeTab.setViewPager(pager);
+        lifeTab.setScrollOffset(getResources().getDisplayMetrics().widthPixels / 2 - 80); //  Tab 居中
 
     }
 
@@ -63,7 +70,7 @@ public class LifeFragment extends BaseFragment implements BaseViewInterface<Cook
         outPut.clear();
         outPut.addAll(cookClassfyOutput.tngou);
         adapter.notifyDataSetChanged();
-        mTabView.notifyDataSetChanged();
+        lifeTab.notifyDataSetChanged();
 
     }
 
@@ -80,5 +87,11 @@ public class LifeFragment extends BaseFragment implements BaseViewInterface<Cook
     @Override
     protected String currentTitle() {
         return "生活";
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }

@@ -20,14 +20,18 @@ import com.viewpagerindicator.TabPageIndicator;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by gaofei on 16/2/23.
  */
 public class HealthFragment extends BaseFragment implements BaseViewInterface<BookKindListBeanOutput> {
 
-    private TabPageIndicator indicator;
-
-    private ViewPager pager;
+    @Bind(R.id.indicator)
+    TabPageIndicator indicator;
+    @Bind(R.id.view_parent)
+    ViewPager viewParent;
 
     private List<BookKindBeanOutput> titles = new ArrayList<BookKindBeanOutput>();
 
@@ -38,23 +42,19 @@ public class HealthFragment extends BaseFragment implements BaseViewInterface<Bo
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        basePresenter=new BasePresenter().setBaseViewInterface(this).setRequestListener(this);
+        basePresenter = new BasePresenter().setBaseViewInterface(this).setRequestListener(this);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.health_fragment, null);
-
-        indicator = (TabPageIndicator) view.findViewById(R.id.indicator);
-
-        pager = (ViewPager) view.findViewById(R.id.view_parent);
-
+        ButterKnife.bind(this, view);
         adapter = new TabsFragmentAdapter(getFragmentManager(), titles);
 
-        pager.setAdapter(adapter);
+        viewParent.setAdapter(adapter);
 
-        indicator.setViewPager(pager);
+        indicator.setViewPager(viewParent);
 
         return view;
     }
@@ -88,5 +88,11 @@ public class HealthFragment extends BaseFragment implements BaseViewInterface<Bo
     @Override
     protected String currentTitle() {
         return "健康";
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }

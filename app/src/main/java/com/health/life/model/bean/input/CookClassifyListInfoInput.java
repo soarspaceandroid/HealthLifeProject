@@ -10,9 +10,9 @@ import rx.Observable;
 
 public class CookClassifyListInfoInput extends BaseBeanInput{
 
-    private int page;
-    private int rows;
-    private int id;
+    public int page;
+    public int rows;
+    public int id;
 
     public CookClassifyListInfoInput(int page, int rows, int id) {
         this.page = page;

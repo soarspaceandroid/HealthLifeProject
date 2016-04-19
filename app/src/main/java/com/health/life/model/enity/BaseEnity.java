@@ -28,11 +28,31 @@ public interface BaseEnity
 
     /**生活 接口  start**/
 
+    /**
+     * 菜谱分类
+     * @param id
+     * @return
+     */
     @POST("/api/cook/classify")
     public Observable<CookClassfyOutput> getCookClassfy(@Query("id") int id);
 
 
+    /**
+     * 菜谱list
+     * @param id
+     * @param page
+     * @param rows
+     * @return
+     */
     @POST("/api/cook/list")
     public Observable<CookClassifyListInfoOutput> getCookListInfo(@Query("id") int id,@Query("page") int page,@Query("rows") int rows);
+
+    /**
+     * 获取菜谱详情
+     * @param name
+     * @return
+     */
+    @POST("/api/cook/name")
+    public Observable<CookClassifyListInfoOutput> getCookInfoDetail(@Query("name") String name);
 
 }

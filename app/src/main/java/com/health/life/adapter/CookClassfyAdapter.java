@@ -41,9 +41,7 @@ public class CookClassfyAdapter extends FragmentPagerAdapter{
         String title = titles.get(position).name;
 
         int id=titles.get(position).id;
-
         CookDisplayFragment fragment = CookDisplayFragment.getInstance(title, id);
-
         return fragment;
     }
 

@@ -18,7 +18,10 @@
     <color name="item_tab_select_bg">#0000FF</color>
     <color name="item_tab_bg">#ff00ff</color>
     <color name="item_tabtext_bg">#ffff00</color>
-
+    <!---pull  to refresh begin-->
+    <color name="black">#000000</color>
+    <color name="gray">#AAAA</color>
+    <!---pull  to refresh end-->
     <!--健康start-->
 
 

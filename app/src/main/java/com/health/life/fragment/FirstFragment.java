@@ -18,11 +18,16 @@ import com.health.life.presenter.BasePresenter;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by ligang967 on 16/2/23.
  */
-public class FirstFragment extends BaseFragment implements BaseViewInterface<BookListInfoOutput>{
+public class FirstFragment extends BaseFragment implements BaseViewInterface<BookListInfoOutput> {
 
+    @Bind(R.id.list_view)
+    ListView listView;
     private View self;
 
     private static Map<String, FirstFragment> instance;
@@ -31,22 +36,21 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
 
     private String title;
 
-    private ListView listView;
 
     private BookListInfoInput infoInput;
 
     private BasePresenter basePresenter;
 
 
-    public static FirstFragment getInstance(String title,int id) {
+    public static FirstFragment getInstance(String title, int id) {
         if (instance == null) {
             instance = new HashMap<String, FirstFragment>();
         }
 
-        return getFragmentByTitle(title,id);
+        return getFragmentByTitle(title, id);
     }
 
-    private static FirstFragment getFragmentByTitle(String title,int id) {
+    private static FirstFragment getFragmentByTitle(String title, int id) {
 
         FirstFragment firstFragment = instance.get(title);
 
@@ -55,9 +59,9 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
 
             Bundle bundle = new Bundle();
 
-            bundle.putString("title",title);
+            bundle.putString("title", title);
 
-            bundle.putInt("id",id);
+            bundle.putInt("id", id);
 
             firstFragment.setArguments(bundle);
 
@@ -75,11 +79,11 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
         id = getArguments().getInt("id");
 
 
-        infoInput = new BookListInfoInput(1,20,id);
+        infoInput = new BookListInfoInput(1, 20, id);
 
         infoInput.setShowDialog(false);
 
-        basePresenter=new BasePresenter().setBaseViewInterface(this).setRequestListener(this);
+        basePresenter = new BasePresenter().setBaseViewInterface(this).setRequestListener(this);
 
     }
 
@@ -101,10 +105,7 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
         if (this.self == null) {
             this.self = inflater.inflate(R.layout.first_fragment, null);
         }
-
-        listView = (ListView)this.self.findViewById(R.id.list_view);
-
-
+        ButterKnife.bind(this, this.self);
         return this.self;
     }
 
@@ -117,7 +118,7 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
 
     @Override
     public void updateView(BookListInfoOutput bookListInfo) {
-        listView.setAdapter(new BookListAdapter(bookListInfo.getTngou(),getActivity()));
+        listView.setAdapter(new BookListAdapter(bookListInfo.getTngou(), getActivity()));
     }
 
     @Override
@@ -129,7 +130,12 @@ public class FirstFragment extends BaseFragment implements BaseViewInterface<Boo
     protected void requestData() {
 
 
-
         basePresenter.setInput(infoInput).load();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }

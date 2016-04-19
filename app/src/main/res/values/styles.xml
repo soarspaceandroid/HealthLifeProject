@@ -12,7 +12,7 @@
 
     </style>
 
-
+    <!-- activity界面跳转动画-->
 
     <style name="AnimationActivity" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_right_in</item>
