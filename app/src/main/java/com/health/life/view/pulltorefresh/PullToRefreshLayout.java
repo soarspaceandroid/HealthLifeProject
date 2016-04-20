@@ -307,7 +307,7 @@ public class PullToRefreshLayout extends RelativeLayout
                 if (pullDownY > 0)
                 {
                     // 刷新结果停留1秒
-                    new RemainHandler(PullToRefreshLayout.this).sendEmptyMessageDelayed(0, 1000);
+                    new RemainHandler(PullToRefreshLayout.this).sendEmptyMessageDelayed(0, 500);
                 } else
                 {
                     changeState(DONE);
@@ -362,7 +362,7 @@ public class PullToRefreshLayout extends RelativeLayout
         if (pullUpY < 0)
         {
             // 刷新结果停留1秒
-            new RemainHandler(this).sendEmptyMessageDelayed(0, 1000);
+            new RemainHandler(this).sendEmptyMessageDelayed(0, 500);
         } else
         {
             changeState(DONE);

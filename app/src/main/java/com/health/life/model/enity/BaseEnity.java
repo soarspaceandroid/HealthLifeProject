@@ -5,6 +5,8 @@ import com.health.life.model.bean.output.BookKindListBeanOutput;
 import com.health.life.model.bean.output.BookListInfoOutput;
 import com.health.life.model.bean.output.CookClassfyOutput;
 import com.health.life.model.bean.output.CookClassifyListInfoOutput;
+import com.health.life.model.bean.output.CookDetailOutput;
+import com.health.life.model.bean.output.FoodDetailOutput;
 
 import retrofit.http.GET;
 import retrofit.http.POST;
@@ -48,11 +50,20 @@ public interface BaseEnity
     public Observable<CookClassifyListInfoOutput> getCookListInfo(@Query("id") int id,@Query("page") int page,@Query("rows") int rows);
 
     /**
-     * 获取菜谱详情
+     * 获取菜谱信息    同一种菜
      * @param name
      * @return
      */
     @POST("/api/cook/name")
-    public Observable<CookClassifyListInfoOutput> getCookInfoDetail(@Query("name") String name);
+    public Observable<CookDetailOutput> getCookInfoDetail(@Query("name") String name);
+
+
+    /**
+     * 获取菜单详情
+     * @param id
+     * @return
+     */
+    @POST("/api/cook/show")
+    public Observable<FoodDetailOutput> getFoodDetail(@Query("id") int id);
 
 }

@@ -56,6 +56,7 @@ public class HealthFragment extends BaseFragment implements BaseViewInterface<Bo
 
         indicator.setViewPager(viewParent);
 
+
         return view;
     }
 

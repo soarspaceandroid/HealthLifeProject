@@ -1,6 +1,5 @@
 package com.health.life.utils;
 
-import android.util.Log;
 
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.Interceptor;
@@ -40,7 +39,7 @@ public class OkHttpUtils {
                             //拦截
                             Response originalResponse = chain.proceed(chain.request());
                             //包装响应体并返回
-                            Log.e("soar" , "result --- "+(originalResponse.newBuilder().body(originalResponse.body()).build()));
+                            Log.e("request --- "+(originalResponse.newBuilder().body(originalResponse.body()).build()));
                             return originalResponse.newBuilder().body(originalResponse.body()).build();
                         }
                     };

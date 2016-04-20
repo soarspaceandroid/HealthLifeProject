@@ -1,12 +1,12 @@
 package com.health.life.presenter;
 
-import android.util.Log;
 
 import com.health.life.interfaces.RequestListener;
 import com.health.life.model.bean.input.BaseBeanInput;
 import com.health.life.model.bean.output.BaseBeanOutput;
 import com.health.life.model.enity.BaseEnity;
 import com.health.life.model.view.BaseViewInterface;
+import com.health.life.utils.Log;
 import com.health.life.utils.RestUtils;
 
 import rx.Subscriber;
@@ -58,13 +58,13 @@ public class BasePresenter<T extends BaseBeanOutput> {
         if (input.isShowDialog()&&this.requestListener!=null) {
             this.requestListener.showProgressDialog();
         }
-        Log.d(TAG , "start load");
+        Log.d("start load");
         input.getData(enity).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<T>() {
                     @Override
                     public void onCompleted() {
-                        Log.d(TAG , "load complete  ");
+                        Log.d("load complete  ");
                         if (input.isShowDialog()&&requestListener!=null) {
                             requestListener.hideProgressDialog();
                         }
@@ -72,7 +72,7 @@ public class BasePresenter<T extends BaseBeanOutput> {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(TAG , "load error  ");
+                        Log.d("load error  ");
                         if (input.isShowDialog()&&requestListener!=null) {
                             requestListener.hideProgressDialog();
                         }
@@ -81,7 +81,7 @@ public class BasePresenter<T extends BaseBeanOutput> {
 
                     @Override
                     public void onNext(T t) {
-                        Log.d(TAG , "load onnext  "+t.getClass());
+                        Log.d("load onnext  "+t.getClass());
                         baseViewInterface.updateView(t);
 
                         if (input.isShowDialog()&&requestListener!=null) {
