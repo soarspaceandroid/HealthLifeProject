@@ -19,19 +19,13 @@ import com.health.life.presenter.BasePresenter;
 import com.health.life.view.pulltorefresh.PullToRefreshLayout;
 import com.health.life.view.pulltorefresh.PullableListView;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 /**
  * Created by ligang967 on 16/2/23.
  */
 public class CookDisplayFragment extends BaseFragment implements BaseViewInterface<CookClassifyListInfoOutput> {
 
-    @Bind(R.id.list_view)
     PullableListView listView;
-    @Bind(R.id.pulllayout)
     PullToRefreshLayout pulllayout;
-
 
     private View self;
     private int id;
@@ -42,7 +36,6 @@ public class CookDisplayFragment extends BaseFragment implements BaseViewInterfa
     private BasePresenter basePresenter;
     private CookListAdapter mAdapter = null;
     private int page = 0;
-
     public static CookDisplayFragment getInstance(String title, int id) {
         CookDisplayFragment firstFragment = new CookDisplayFragment();
         Bundle bundle = new Bundle();
@@ -64,7 +57,7 @@ public class CookDisplayFragment extends BaseFragment implements BaseViewInterfa
 
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        if (!enter) {
+        if(!enter){
             finishRequestUI();
         }
         return super.onCreateAnimation(transit, enter, nextAnim);
@@ -81,20 +74,22 @@ public class CookDisplayFragment extends BaseFragment implements BaseViewInterfa
     }
 
 
-    private void finishRequestUI() {
-        if (pulllayout != null) {
+
+    private void finishRequestUI(){
+        if(pulllayout != null) {
             pulllayout.refreshFinish(PullToRefreshLayout.SUCCEED);
             pulllayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
         }
     }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (this.self == null) {
             this.self = inflater.inflate(R.layout.dis_custom_fragment, null);
         }
-        ButterKnife.bind(this, this.self);
+        listView = (PullableListView)self.findViewById(R.id.list_view);
+        pulllayout = (PullToRefreshLayout)self.findViewById(R.id.pulllayout);
+
         pulllayout.setOnPullListener(new PullToRefreshLayout.OnPullListener() {
             @Override
             public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
@@ -111,11 +106,10 @@ public class CookDisplayFragment extends BaseFragment implements BaseViewInterfa
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CookInfoDetailActivity.showActivity(getActivity(), infoOutput.tngou.get(position).name, view.findViewById(R.id.image), infoOutput.tngou.get(position).img);
+                CookInfoDetailActivity.showActivity(getActivity(), infoOutput.tngou.get(position).name , view.findViewById(R.id.image) , infoOutput.tngou.get(position).img);
             }
         });
         firstRequest();
-
         return this.self;
     }
 
@@ -129,16 +123,16 @@ public class CookDisplayFragment extends BaseFragment implements BaseViewInterfa
     @Override
     public void updateView(CookClassifyListInfoOutput cookClassifyListInfoOutput) {
         finishRequestUI();
-        if (infoOutput == null) {
-            infoOutput = cookClassifyListInfoOutput;
-        } else {
+        if(infoOutput == null){
+            infoOutput = cookClassifyListInfoOutput ;
+        }else {
             infoOutput.tngou.addAll(cookClassifyListInfoOutput.tngou);
         }
-        if (mAdapter == null) {
-            mAdapter = new CookListAdapter(infoOutput.tngou, getActivity());
+        if(mAdapter == null){
+            mAdapter = new CookListAdapter(infoOutput.tngou , getActivity());
             listView.setAdapter(mAdapter);
 
-        } else {
+        }else{
             mAdapter.notifyDataSetChanged();
         }
 
@@ -157,22 +151,18 @@ public class CookDisplayFragment extends BaseFragment implements BaseViewInterfa
     }
 
 
-    public void doRequest(int page) {
+    public void doRequest(int page){
         infoInput.page = page;
         basePresenter.setInput(infoInput).load();
     }
 
 
-    public void firstRequest() {
-        if (isFirstIn) {
+    public void firstRequest(){
+        if (isFirstIn)
+        {
             pulllayout.autoRefresh();
             isFirstIn = false;
         }
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
 }
