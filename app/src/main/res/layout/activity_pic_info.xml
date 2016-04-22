@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.jpardogo.listbuddies.lib.views.ListBuddiesLayout
+        xmlns:listbuddies="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/listbuddies"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        listbuddies:speed="2"
+        listbuddies:gap="@dimen/dp_2"
+        listbuddies:gapColor="@color/color_539728"
+        listbuddies:listsDivider="@null"
+        listbuddies:listsDividerHeight="@dimen/dp_0"
+        listbuddies:autoScrollFaster="right"
+        listbuddies:scrollFaster="left"/>
+
+</RelativeLayout>

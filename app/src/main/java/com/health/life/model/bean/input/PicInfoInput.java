@@ -8,17 +8,16 @@ import rx.Observable;
  * Created by gaofei on 2016/2/26.
  */
 
-public class CookClassifyInput extends BaseBeanInput{
+public class PicInfoInput extends BaseBeanInput{
 
-    private int id ; // 分类ID
+    private int id;
 
-    public CookClassifyInput(int id) {
+    public PicInfoInput(int id) {
         this.id = id;
     }
 
-
     @Override
     public Observable getData(BaseEnity baseEnity) {
-        return baseEnity.getCookClassfy(id);
+        return baseEnity.getPicInfo(id);
     }
 }

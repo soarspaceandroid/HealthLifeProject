@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_dddddd">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+<android.support.v7.widget.CardView
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:stateListAnimator="@drawable/translationz_anim"
+    android:foreground="?attr/selectableItemBackground"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="8dp">
+
+<com.ramotion.foldingcell.FoldingCell
+    android:id="@+id/folding_cell1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <FrameLayout
+        android:id="@+id/cell_content_view1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:visibility="gone">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/image11"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@mipmap/ic_launcher"
+                android:scaleType="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="社会热点"
+                android:layout_marginLeft="20dp"
+                android:textSize="23sp"
+                android:textColor="@color/color_539728"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="社会是一个复杂的东西 , 你要去了解才会融入 , 什么都不说了, 你懂的, 现在是否有点格格不入了  "
+                android:textSize="20sp"
+                android:layout_margin="10dp"
+                android:textColor="@color/color_999999"/>
+
+
+            <android.support.v7.widget.CardView
+
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:cardBackgroundColor="@color/color_539728"
+                android:stateListAnimator="@drawable/translationz_anim"
+                android:foreground="?attr/selectableItemBackground"
+                android:layout_margin="30dp"
+                app:cardCornerRadius="8dp" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="说走就走"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"/>
+
+                </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/cell_title_view1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/hot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/image1"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@mipmap/ic_launcher"/>
+                
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="社会热点"
+                    android:textSize="23sp"
+                    android:gravity="center"
+                    android:textColor="@color/color_539728"/>
+
+            </LinearLayout>
+
+
+
+    </FrameLayout>
+</com.ramotion.foldingcell.FoldingCell>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:stateListAnimator="@drawable/translationz_anim"
+        android:foreground="?attr/selectableItemBackground"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="8dp">
+
+    <com.ramotion.foldingcell.FoldingCell
+        android:id="@+id/folding_cell2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <FrameLayout
+            android:id="@+id/cell_content_view2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:visibility="gone">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/image12"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@mipmap/ic_launcher"
+                    android:scaleType="center"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="美图"
+                    android:textSize="23sp"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/color_539728"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="这里竟然会有美眼球的装扮 , 我先去也 , 你要不要跟过来.... "
+                    android:textSize="20sp"
+                    android:textColor="@color/color_999999"/>
+
+
+                <android.support.v7.widget.CardView
+
+                    android:id="@+id/button2"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    app:cardBackgroundColor="@color/color_539728"
+                    android:stateListAnimator="@drawable/translationz_anim"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:layout_margin="30dp"
+                    app:cardCornerRadius="8dp" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="说走就走"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"/>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/cell_title_view2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <LinearLayout
+                android:id="@+id/pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/image2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@mipmap/ic_launcher"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="美图"
+                    android:textSize="23sp"
+                    android:gravity="center"
+                    android:textColor="@color/color_539728"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+    </com.ramotion.foldingcell.FoldingCell>
+</android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:stateListAnimator="@drawable/translationz_anim"
+        android:foreground="?attr/selectableItemBackground"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="8dp">
+
+    <com.ramotion.foldingcell.FoldingCell
+        android:id="@+id/folding_cell3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <FrameLayout
+            android:id="@+id/cell_content_view3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:visibility="gone">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/image13"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@mipmap/ic_launcher"
+                    android:scaleType="fitXY"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="健康菜谱"
+                    android:textSize="23sp"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/color_539728"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="话说吃的健康才能对着二楼的撸 , 让我们去看看吃货的天下吧.... "
+                    android:textSize="20sp"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/color_999999"/>
+
+
+                <android.support.v7.widget.CardView
+
+                    android:id="@+id/button3"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    app:cardBackgroundColor="@color/color_539728"
+                    android:stateListAnimator="@drawable/translationz_anim"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:layout_margin="30dp"
+                    app:cardCornerRadius="8dp" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="说走就走"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"/>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/cell_title_view3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/cook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/image3"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@mipmap/ic_launcher"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="健康菜谱"
+                    android:textSize="23sp"
+                    android:gravity="center"
+                    android:textColor="@color/color_539728"/>
+
+            </LinearLayout>
+
+
+        </FrameLayout>
+    </com.ramotion.foldingcell.FoldingCell>
+</android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:stateListAnimator="@drawable/translationz_anim"
+        android:foreground="?attr/selectableItemBackground"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="8dp">
+
+    <com.ramotion.foldingcell.FoldingCell
+        android:id="@+id/folding_cell4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <FrameLayout
+            android:id="@+id/cell_content_view4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:visibility="gone">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/image14"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@mipmap/ic_launcher"
+                    android:scaleType="center"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="健康食品"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="23sp"
+                    android:textColor="@color/color_539728"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="我擦 ,我是吃货我怕谁 , 不服来战  ,等你来 ,我先去也.... "
+                    android:textSize="20sp"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/color_999999"/>
+
+
+                <android.support.v7.widget.CardView
+
+                    android:id="@+id/button4"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    app:cardBackgroundColor="@color/color_539728"
+                    android:stateListAnimator="@drawable/translationz_anim"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:layout_margin="30dp"
+                    app:cardCornerRadius="8dp" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="说走就走"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"/>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/cell_title_view4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/food"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/image4"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@mipmap/ic_launcher"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="健康食品"
+                    android:textSize="23sp"
+                    android:gravity="center"
+                    android:textColor="@color/color_539728"/>
+
+            </LinearLayout>
+
+
+
+        </FrameLayout>
+    </com.ramotion.foldingcell.FoldingCell>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
+</ScrollView>

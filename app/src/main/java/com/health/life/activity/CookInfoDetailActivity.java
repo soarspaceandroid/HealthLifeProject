@@ -5,6 +5,7 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -137,6 +138,10 @@ public class CookInfoDetailActivity extends BaseActivity implements BaseViewInte
         listview.setAdapter(new QuickAdapter<CookDetailOutput.TngouEntity>(this, R.layout.cook_info_list_adapter, cookDetailOutput.tngou) {
             @Override
             protected void convert(BaseAdapterHelper helper, CookDetailOutput.TngouEntity item) {
+                CardView cardView = ((CardView) helper.getView(R.id.card_parent));
+                if(Build.VERSION.SDK_INT >= 21) {
+                    cardView.setElevation(15);
+                }
                 helper.setText(R.id.des, item.description);
                 helper.setText(R.id.name, item.name);
                 Picasso.with(context)

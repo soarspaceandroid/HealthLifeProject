@@ -5,6 +5,37 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <com.health.life.view.pulltorefresh.PullToRefreshLayout
+            android:id="@+id/cook_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <com.health.life.view.pulltorefresh.PullableListView
+                android:id="@+id/cook_list"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:listSelector="@color/color_539728">
+
+            </com.health.life.view.pulltorefresh.PullableListView>
+
+        </com.health.life.view.pulltorefresh.PullToRefreshLayout>
+
+        <View android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/color_539728"></View>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <LinearLayout
         android:id="@+id/tab_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,4 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tab_parent" />
+
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

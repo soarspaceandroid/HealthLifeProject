@@ -36,6 +36,8 @@ public class CookDisplayFragment extends BaseFragment implements BaseViewInterfa
     private BasePresenter basePresenter;
     private CookListAdapter mAdapter = null;
     private int page = 0;
+    private boolean changeID = false;
+
     public static CookDisplayFragment getInstance(String title, int id) {
         CookDisplayFragment firstFragment = new CookDisplayFragment();
         Bundle bundle = new Bundle();
@@ -126,14 +128,20 @@ public class CookDisplayFragment extends BaseFragment implements BaseViewInterfa
         if(infoOutput == null){
             infoOutput = cookClassifyListInfoOutput ;
         }else {
-            infoOutput.tngou.addAll(cookClassifyListInfoOutput.tngou);
+            if(!changeID) {
+                // 下拉加载更多的时候
+                infoOutput.tngou.addAll(cookClassifyListInfoOutput.tngou);
+            }else{
+                infoOutput = cookClassifyListInfoOutput ;
+                changeID = false;
+            }
         }
         if(mAdapter == null){
             mAdapter = new CookListAdapter(infoOutput.tngou , getActivity());
             listView.setAdapter(mAdapter);
 
         }else{
-            mAdapter.notifyDataSetChanged();
+            mAdapter.setData(cookClassifyListInfoOutput.tngou);
         }
 
 
@@ -162,6 +170,18 @@ public class CookDisplayFragment extends BaseFragment implements BaseViewInterfa
         {
             pulllayout.autoRefresh();
             isFirstIn = false;
+        }
+    }
+
+    public void setData(int id){
+        changeID = true;
+        if(infoInput == null){
+            infoInput = new CookClassifyListInfoInput(1, 20, id);
+        }else{
+            infoInput.id = id;
+        }
+        if(pulllayout != null) {
+            pulllayout.autoRefresh();
         }
     }
 

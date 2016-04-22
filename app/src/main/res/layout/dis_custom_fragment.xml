@@ -7,6 +7,9 @@
     <com.health.life.view.pulltorefresh.PullableListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:scrollbars="none"
         android:id="@+id/list_view"></com.health.life.view.pulltorefresh.PullableListView>
 
 </com.health.life.view.pulltorefresh.PullToRefreshLayout>

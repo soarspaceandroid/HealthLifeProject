@@ -10,7 +10,7 @@ import com.health.life.R;
 import com.health.life.base.BaseActivity;
 import com.health.life.base.BaseFragment;
 import com.health.life.fragment.HealthFragment;
-import com.health.life.fragment.LifeFragment;
+import com.health.life.fragment.LifeMainFragment;
 import com.health.life.fragment.MyFragment;
 import com.health.life.view.CustomTabView;
 
@@ -63,7 +63,7 @@ public class MainActivity extends BaseActivity {
      */
     private void initTabView() {
         listFragment.add(new HealthFragment());
-        listFragment.add(new LifeFragment());
+        listFragment.add(new LifeMainFragment());
         listFragment.add(new MyFragment());
 
         List<CustomTabView.TabViewData> list = new ArrayList<>();

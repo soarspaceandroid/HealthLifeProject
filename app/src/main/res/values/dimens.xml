@@ -36,6 +36,8 @@
     <!--生活start-->
     <dimen name="indicators_height">2dp</dimen>
     <dimen name="tab_text_size">16sp</dimen>
+    <dimen name="dp_0">0dp</dimen>
+    <dimen name="dp_2">2dp</dimen>
     <dimen name="dp_10">10dp</dimen>
     <dimen name="dp_11">11dp</dimen>
     <dimen name="dp_12">12dp</dimen>
@@ -44,6 +46,10 @@
     <dimen name="dp_15">15dp</dimen>
     <dimen name="dp_16">16dp</dimen>
     <dimen name="dp_20">20dp</dimen>
+
+    <dimen name="dp_300">300dp</dimen>
+
+    <dimen name="dp_200">200dp</dimen>
 
 
 </resources>

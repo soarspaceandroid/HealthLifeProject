@@ -2,7 +2,6 @@ package com.health.life.view.contextmenu.lib;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
@@ -56,7 +55,7 @@ public class Utils {
                 (int) context.getResources().getDimension(R.dimen.menu_item_padding));
         imageView.setClickable(false);
         imageView.setFocusable(false);
-        imageView.setBackgroundColor(Color.GREEN);
+        imageView.setBackgroundColor(context.getResources().getColor(R.color.color_539728));
 
         if (item.getColor() != 0) {
             Drawable color = new ColorDrawable(item.getColor());

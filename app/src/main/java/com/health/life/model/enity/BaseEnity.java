@@ -7,6 +7,10 @@ import com.health.life.model.bean.output.CookClassfyOutput;
 import com.health.life.model.bean.output.CookClassifyListInfoOutput;
 import com.health.life.model.bean.output.CookDetailOutput;
 import com.health.life.model.bean.output.FoodDetailOutput;
+import com.health.life.model.bean.output.PicClassfyOutput;
+import com.health.life.model.bean.output.PicDetailOutput;
+import com.health.life.model.bean.output.PicInfoOutput;
+import com.health.life.model.bean.output.PicNewOutput;
 
 import retrofit.http.GET;
 import retrofit.http.POST;
@@ -66,4 +70,33 @@ public interface BaseEnity
     @POST("/api/cook/show")
     public Observable<FoodDetailOutput> getFoodDetail(@Query("id") int id);
 
+
+    /**
+     * 获取pic分类
+     * @return
+     */
+    @POST("/tnfs/api/classify")
+    public Observable<PicClassfyOutput> getPicClassfy();
+
+    /**
+     * 获取picinfo
+     * @return
+     */
+    @POST("/tnfs/api/list")
+    public Observable<PicInfoOutput> getPicInfo(@Query("id") int id);
+
+    /**
+     * 获取pic 最新
+     * @return
+     */
+    @POST("/tnfs/api/news")
+    public Observable<PicNewOutput> getPicNew(@Query("id") long id,@Query("classify") int classify,@Query("rows") int rows);
+
+    /**
+     * 获取pic 
+     * detail
+     * @return
+     */
+    @POST("/tnfs/api/show")
+    public Observable<PicDetailOutput> getPicDetail(@Query("id") long id);
 }

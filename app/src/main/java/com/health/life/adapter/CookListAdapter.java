@@ -1,6 +1,8 @@
 package com.health.life.adapter;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +60,7 @@ public class CookListAdapter extends BaseAdapter {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.cooklist_adater, null);
+            viewHolder.cardView = (CardView)convertView.findViewById(R.id.card_parent);
             viewHolder.des = (TextView) convertView.findViewById(R.id.des);
             viewHolder.name = (TextView) convertView.findViewById(R.id.name);
             viewHolder.image = (ImageView) convertView.findViewById(R.id.image);
@@ -65,6 +68,10 @@ public class CookListAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+        if(Build.VERSION.SDK_INT >= 21) {
+            viewHolder.cardView.setElevation(15);
+        }
+
         CookClassifyListInfoOutput.TngouEntity entity = tngou.get(position);
         viewHolder.name.setText(entity.name + "");
         viewHolder.des.setText(entity.food + "");
@@ -80,11 +87,18 @@ public class CookListAdapter extends BaseAdapter {
 
     private static class ViewHolder {
 
+        CardView cardView;
+
         TextView name;
 
         TextView des;
 
         ImageView image;
 
+    }
+
+    public void setData(List<CookClassifyListInfoOutput.TngouEntity> tngou){
+        this.tngou = tngou;
+        notifyDataSetChanged();
     }
 }
