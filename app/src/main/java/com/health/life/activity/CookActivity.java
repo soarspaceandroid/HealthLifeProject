@@ -61,6 +61,7 @@ public class CookActivity extends BaseActivity implements BaseViewInterface<Cook
         super.onCreate(savedInstanceState);
         setContentView(R.layout.life_fragment);
         ButterKnife.bind(this);
+        controlMenu(false);
         basePresenter = new BasePresenter().setBaseViewInterface(this).setRequestListener(this);
         initView();
     }

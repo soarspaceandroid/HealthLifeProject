@@ -24,6 +24,10 @@
         <activity android:name=".activity.PicInfoActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.PicNewActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.PicDetailActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.HotPointDetailActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.HotPointListActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.LoginActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.RegisterActivity" android:screenOrientation="portrait"></activity>
     </application>
 <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

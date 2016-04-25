@@ -30,6 +30,7 @@
     <color name="background_tab_pressed">#00000000</color>
     <color name="color_2f2f2f">#2f2f2f</color>
     <color name="color_dddddd">#dddddd</color>
+    <color name="pop_back">#77000000</color>
 
 
 

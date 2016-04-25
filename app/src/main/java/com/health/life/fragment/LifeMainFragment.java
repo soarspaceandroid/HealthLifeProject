@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.health.life.R;
 import com.health.life.activity.CookActivity;
+import com.health.life.activity.HotPointListActivity;
 import com.health.life.activity.PicClassActivity;
 import com.health.life.base.BaseFragment;
 import com.health.life.model.bean.output.CookClassfyOutput;
@@ -187,7 +188,7 @@ public class LifeMainFragment extends BaseFragment implements BaseViewInterface<
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("you click 1");
+                HotPointListActivity.showActivity(getActivity());
             }
         });
         button2.setOnClickListener(new View.OnClickListener() {

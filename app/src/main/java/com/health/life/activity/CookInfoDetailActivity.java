@@ -72,6 +72,7 @@ public class CookInfoDetailActivity extends BaseActivity implements BaseViewInte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cook_detail);
         ButterKnife.bind(this);
+        controlMenu(false);
         basePresenter = new BasePresenter().setBaseViewInterface(this).setRequestListener(this);
         layoutParent.setPullUpEnable(false);
         layoutParent.setOnPullListener(new PullToRefreshLayout.OnPullListener() {

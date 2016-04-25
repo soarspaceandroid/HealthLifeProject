@@ -136,5 +136,9 @@
 
 
     <!--生活start-->
+    <style name="InputLayoutStyle">
+        <item name="colorAccent">@color/color_539728</item>
+    </style>
+
 
 </resources>

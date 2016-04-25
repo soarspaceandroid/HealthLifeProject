@@ -99,4 +99,13 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment imple
     public void hideProgressDialog() {
      removeDialog(getActivity());
     }
+
+    @Override
+    public void errorDisplay(String errorMsg) {
+    }
+
+    @Override
+    public void errorHide() {
+
+    }
 }

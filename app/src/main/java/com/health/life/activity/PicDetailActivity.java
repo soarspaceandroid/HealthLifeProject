@@ -58,6 +58,7 @@ public class PicDetailActivity extends BaseActivity implements BaseViewInterface
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pic_detail_parent);
         ButterKnife.bind(this);
+        controlMenu(true);
         basePresenter = new BasePresenter().setBaseViewInterface(this).setRequestListener(this);
 
 

@@ -39,7 +39,8 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         initViews();
         setSwipeBackEnable(false); // 主页面tab不滑动返回
-        getAppBar().getLeftRoot().setVisibility(View.INVISIBLE);
+        controlBack(false);
+        controlMenu(false);
         initTabView();
 
     }

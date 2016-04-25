@@ -11,14 +11,20 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.health.life.R;
 import com.health.life.base.BaseActivity;
+import com.health.life.interfaces.CommentPostListener;
+import com.health.life.interfaces.RequestListener;
+import com.health.life.model.bean.input.CommentInput;
 import com.health.life.model.bean.input.FoodDetailInput;
+import com.health.life.model.bean.output.CommentOutput;
 import com.health.life.model.bean.output.FoodDetailOutput;
 import com.health.life.model.view.BaseViewInterface;
 import com.health.life.presenter.BasePresenter;
 import com.health.life.utils.Config;
+import com.health.life.utils.PopWindowUIUtils;
 import com.health.life.view.pulltorefresh.PullToRefreshLayout;
 import com.squareup.picasso.Picasso;
 
@@ -46,6 +52,8 @@ public class FoodDetailActivity extends BaseActivity implements BaseViewInterfac
     private int foodId;
     private BasePresenter basePresenter;
 
+    private FoodDetailOutput foodDetailOutput;
+
     public static void showActivity(Activity classActivity, String name, View shareView, int id, String path) {
         Intent intent = new Intent(classActivity, FoodDetailActivity.class);
         intent.putExtra(COOK_NAME, name);
@@ -72,7 +80,7 @@ public class FoodDetailActivity extends BaseActivity implements BaseViewInterfac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_detail);
         ButterKnife.bind(this);
-
+        controlMenu(true);
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) foodImage.getLayoutParams();
         params.height = getResources().getDisplayMetrics().widthPixels * 4 / 5;
         foodImage.setLayoutParams(params);
@@ -118,6 +126,7 @@ public class FoodDetailActivity extends BaseActivity implements BaseViewInterfac
 
     @Override
     public void updateView(FoodDetailOutput foodDetailOutput) {
+        this.foodDetailOutput = foodDetailOutput;
         // 使用quickAdapter
         layoutParent.refreshFinish(PullToRefreshLayout.SUCCEED);
         layoutParent.loadmoreFinish(PullToRefreshLayout.SUCCEED);
@@ -129,5 +138,49 @@ public class FoodDetailActivity extends BaseActivity implements BaseViewInterfac
     public void showError(String msg) {
         layoutParent.refreshFinish(PullToRefreshLayout.FAIL);
         layoutParent.loadmoreFinish(PullToRefreshLayout.FAIL);
+    }
+
+    @Override
+    public void commentRequest() {
+        if(this.foodDetailOutput == null){
+            return;
+        }
+        PopWindowUIUtils.commentPop(this, foodDetailOutput.name, new CommentPostListener() {
+            @Override
+            public void submit(String comment) {
+                basePresenter.setBaseViewInterface(new BaseViewInterface<CommentOutput>() {
+                    @Override
+                    public void updateView(CommentOutput o) {
+                        Toast.makeText(FoodDetailActivity.this, "评论成功", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void showError(String msg) {
+
+                    }
+                }).setRequestListener(new RequestListener() {
+                    @Override
+                    public void showProgressDialog() {
+                        showLoadDialog(FoodDetailActivity.this);
+                    }
+
+                    @Override
+                    public void hideProgressDialog() {
+
+                        FoodDetailActivity.this.hideProgressDialog();
+                    }
+
+                    @Override
+                    public void errorDisplay(String errorMsg) {
+
+                    }
+
+                    @Override
+                    public void errorHide() {
+
+                    }
+                }).setInput(new CommentInput(share.getValueString(Config.LOGIN_KEY_TOKEN, ""), foodDetailOutput.id, "cook", foodDetailOutput.name, comment)).load();
+            }
+        });
     }
 }

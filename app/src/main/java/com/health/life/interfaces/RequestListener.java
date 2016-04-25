@@ -8,4 +8,8 @@ public interface RequestListener {
 
     void hideProgressDialog();
 
+    void errorDisplay(String errorMsg);
+
+    void errorHide();
+
 }

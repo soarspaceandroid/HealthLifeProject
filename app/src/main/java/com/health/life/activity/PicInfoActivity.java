@@ -64,26 +64,31 @@ public class PicInfoActivity extends BaseActivity implements BaseViewInterface<P
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pic_info);
         ButterKnife.bind(this);
+        controlMenu(false);
         basePresenter = new BasePresenter().setBaseViewInterface(this).setRequestListener(this);
 
     }
 
     @Override
     public void updateView(PicInfoOutput picInfoOutput) {
-        final List<PicInfoOutput.TngouEntity> data1 = picInfoOutput.tngou.subList(0 ,picInfoOutput.tngou.size()/2-3);
-        final List<PicInfoOutput.TngouEntity> data2 = picInfoOutput.tngou.subList(picInfoOutput.tngou.size()/2-3 ,picInfoOutput.tngou.size());
+        final List<PicInfoOutput.TngouEntity> data1 = picInfoOutput.tngou.subList(0 ,picInfoOutput.tngou.size()/2);
+        final List<PicInfoOutput.TngouEntity> data2 = picInfoOutput.tngou.subList(picInfoOutput.tngou.size()/2 ,picInfoOutput.tngou.size());
         CircularAdapter adapter = new CircularAdapter(this, getResources().getDimensionPixelSize(R.dimen.dp_300), data1);
         CircularAdapter adapter2 = new CircularAdapter(this, getResources().getDimensionPixelSize(R.dimen.dp_200), data2);
         listbuddies.setOnItemClickListener(new ListBuddiesLayout.OnBuddyItemClickListener() {
             @Override
             public void onBuddyItemClicked(AdapterView<?> parent, View view, int buddy, int position, long id) {
+                int classfy = position +1 ;
+                if(classfy <0){
+                    classfy = 0;
+                }
                 switch (buddy){
                     case 0:
                         //left
-                        PicNewActivity.showActivity(PicInfoActivity.this ,data1.get(position).id , view.findViewById(R.id.text) ,data1.get(position).title ,data1.get(position).galleryclass);
+                        PicNewActivity.showActivity(PicInfoActivity.this ,data1.get(classfy).id , view.findViewById(R.id.text) ,data1.get(position).title ,data1.get(position).galleryclass);
                         break;
                     case 1:
-                        PicNewActivity.showActivity(PicInfoActivity.this ,data2.get(position).id , view.findViewById(R.id.text) ,data2.get(position).title ,data2.get(position).galleryclass);
+                        PicNewActivity.showActivity(PicInfoActivity.this ,data2.get(classfy).id , view.findViewById(R.id.text) ,data2.get(position).title ,data2.get(position).galleryclass);
                         //right
                         break;
                 }

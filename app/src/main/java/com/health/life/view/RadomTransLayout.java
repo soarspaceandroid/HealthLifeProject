@@ -16,9 +16,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.health.life.activity.PicClassActivity;
-import com.health.life.activity.PicInfoActivity;
-import com.health.life.model.bean.output.PicClassfyOutput;
+import com.health.life.model.bean.output.HotPointClassfyOutput;
 import com.health.life.utils.DensityUtil;
 import com.health.life.utils.StatusBarCompat;
 
@@ -29,7 +27,7 @@ import java.util.Random;
  */
 public class RadomTransLayout extends RelativeLayout {
 
-    private PicClassfyOutput picClassfyOutput;
+    private HotPointClassfyOutput hotPointClassfyOutput;
     private Context context;
     private int width , height;
     private Random random;
@@ -51,8 +49,8 @@ public class RadomTransLayout extends RelativeLayout {
     }
 
 
-    public void setData(PicClassfyOutput picClassfyOutput){
-        this.picClassfyOutput = picClassfyOutput;
+    public void setData(HotPointClassfyOutput hotPointClassfyOutput){
+        this.hotPointClassfyOutput = hotPointClassfyOutput;
         TypedValue tv = new TypedValue();
         if (context.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
             actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics())+ StatusBarCompat.getStatusBarHeight(context);
@@ -64,7 +62,7 @@ public class RadomTransLayout extends RelativeLayout {
         width = context.getResources().getDisplayMetrics().widthPixels;
         height = context.getResources().getDisplayMetrics().heightPixels;
         random = new Random();
-        CountDownTimer timer = new CountDownTimer(10000 , 500) {
+        CountDownTimer timer = new CountDownTimer(10000 , 800) {
             @Override
             public void onTick(long millisUntilFinished) {
                 addView(-1);
@@ -88,7 +86,7 @@ public class RadomTransLayout extends RelativeLayout {
         }
         int item = 0;
         if(positions == -1){
-            item = random.nextInt(picClassfyOutput.tngou.size());
+            item = random.nextInt(hotPointClassfyOutput.tngou.size());
         }else{
             item = positions;
         }
@@ -99,16 +97,16 @@ public class RadomTransLayout extends RelativeLayout {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setMargins(x, y, 0, 0);
         final TextView textView = new TextView(context);
-        textView.setText(picClassfyOutput.tngou.get(position).title);
+        textView.setText(hotPointClassfyOutput.tngou.get(position).name);
         addView(textView, params);
         addViewAnimation(textView);
-        textView.setTransitionName("shareview3");
         textView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                PicInfoActivity.showActivity((PicClassActivity)context,picClassfyOutput.tngou.get(position).id , textView , picClassfyOutput.tngou.get(position).name);
+//                HotPointListActivity.showActivity((HotPointDetailActivity) context, hotPointClassfyOutput.tngou.get(position).id , textView);
             }
         });
+        textView.setTransitionName("shareview3");
         textView.setTextColor(colors[random.nextInt(colors.length-1)]);
         textView.setTextSize(random.nextInt(18) + 17);
         textView.postDelayed(new Runnable() {
@@ -124,12 +122,11 @@ public class RadomTransLayout extends RelativeLayout {
         AnimatorSet set = new AnimatorSet();
         Path path = new Path();
         path.moveTo(x, y);
-        if(x < DensityUtil.px2dip(context, width / 2)){
-            path.quadTo(x+DensityUtil.px2dip(context, width / 2) , y , DensityUtil.px2dip(context, width / 2) , DensityUtil.getScreenHeight(context) - actionBarHeight);
+        if(x < width / 2){
+            path.quadTo(x+width/ 2 , y , DensityUtil.px2dip(context ,width / 2) , DensityUtil.getScreenHeight(context) - actionBarHeight);
         }else{
-            path.quadTo(x - DensityUtil.px2dip(context, width / 2) , y , DensityUtil.px2dip(context, width / 2) , DensityUtil.getScreenHeight(context) - actionBarHeight);
+            path.quadTo(x - width / 2 , y , DensityUtil.px2dip(context ,width / 2) , DensityUtil.getScreenHeight(context) - actionBarHeight);
         }
-//        path.lineTo(DensityUtil.px2dip(context, width / 2) , DensityUtil.getScreenHeight(context) - 300);
         ObjectAnimator pathO = ObjectAnimator.ofFloat(view , View.X , View.Y , path);
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(view, "scaleX", 1.0f, 0.0f);
         ObjectAnimator scaleY = ObjectAnimator.ofFloat(view , "scaleY" , 1.0f , 0.0f);

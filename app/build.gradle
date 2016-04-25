@@ -43,4 +43,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.ramotion.foldingcell:folding-cell:1.0.0'
     compile 'com.jpardogo.listbuddies:library:1.1.1'
+    compile 'co.lujun:androidtagview:1.0.0'
+    compile 'com.hrules:trendtextview:1.0.1'
+    compile 'com.moxun:tagcloudlib:1.+'
 }

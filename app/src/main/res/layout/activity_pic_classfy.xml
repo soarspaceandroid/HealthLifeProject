@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.health.life.view.RadomTransLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/radomlayout"
-    android:orientation="vertical"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    >
 
+<com.moxun.tagcloudlib.view.TagCloudView
+    android:id="@+id/tagcloudview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:autoScrollMode = "uniform"
+    app:radiusPercent = "0.6"
+    app:scrollSpeed = "3"
+    app:lightColor = "#ff0000"
+    app:darkColor = "@color/color_539728"
+    >
+</com.moxun.tagcloudlib.view.TagCloudView>
 
-</com.health.life.view.RadomTransLayout>
+</LinearLayout>

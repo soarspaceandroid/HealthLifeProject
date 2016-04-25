@@ -58,13 +58,14 @@ public class BasePresenter<T extends BaseBeanOutput> {
         if (input.isShowDialog()&&this.requestListener!=null) {
             this.requestListener.showProgressDialog();
         }
-        Log.d("start load");
+        requestListener.errorHide();
+        Log.d("start request");
         input.getData(enity).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<T>() {
                     @Override
                     public void onCompleted() {
-                        Log.d("load complete  ");
+                        Log.d("request complete  ");
                         if (input.isShowDialog()&&requestListener!=null) {
                             requestListener.hideProgressDialog();
                         }
@@ -72,16 +73,17 @@ public class BasePresenter<T extends BaseBeanOutput> {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("load error  ");
+                        Log.d("request error  ");
                         if (input.isShowDialog()&&requestListener!=null) {
                             requestListener.hideProgressDialog();
                         }
-                        baseViewInterface.showError(e.getMessage());
+                        baseViewInterface.showError(e.getLocalizedMessage());
+                        requestListener.errorDisplay(e.getLocalizedMessage());
                     }
 
                     @Override
                     public void onNext(T t) {
-                        Log.d("load onnext  "+t.getClass());
+                        Log.d("request onnext  "+t.getClass());
                         baseViewInterface.updateView(t);
 
                         if (input.isShowDialog()&&requestListener!=null) {

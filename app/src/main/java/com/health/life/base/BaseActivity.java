@@ -1,14 +1,16 @@
 package com.health.life.base;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +18,15 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.health.life.R;
+import com.health.life.activity.LoginActivity;
 import com.health.life.activity.swipeback.SwipeBackActivity;
 import com.health.life.interfaces.RequestListener;
 import com.health.life.utils.AbLoadDialogFragment;
+import com.health.life.utils.Config;
+import com.health.life.utils.SharePreferenceUtil;
 import com.health.life.utils.StatusBarCompat;
 import com.health.life.view.AppBar;
+import com.health.life.view.ErrorViewLayout;
 import com.health.life.view.contextmenu.lib.ContextMenuDialogFragment;
 import com.health.life.view.contextmenu.lib.MenuObject;
 import com.health.life.view.contextmenu.lib.MenuParams;
@@ -34,10 +40,11 @@ import java.util.List;
 public abstract class BaseActivity extends SwipeBackActivity implements RequestListener , OnMenuItemClickListener, OnMenuItemLongClickListener {
 
 
-    private FrameLayout content;
+    private ErrorViewLayout content;
     private AppBar appBar;
     private FragmentManager fragmentManager ;
     private ContextMenuDialogFragment mMenuDialogFragment;
+    public SharePreferenceUtil share;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +61,22 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
 
 
     /**
+     * 控制back按钮的显示和隐藏  或是自定义左边的相关内容的隐藏
+     * @param enable
+     */
+    public void controlBack(boolean enable){
+        appBar.getLeftRoot().setVisibility(enable ? View.VISIBLE : View.INVISIBLE);
+    }
+
+    /**
+     * 控制menu按钮的显示和隐藏  或是自定义右边的相关内容的隐藏
+     * @param enable
+     */
+    public void controlMenu(boolean enable){
+        appBar.getRightRoot().setVisibility(enable ? View.VISIBLE : View.INVISIBLE);
+    }
+
+    /**
      * 请求数据
      * @return
      */
@@ -61,11 +84,11 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
 
 
     private void initBaseData() {
-
+        share = new SharePreferenceUtil(this);
     }
 
     private void initBaseView() {
-        content = (FrameLayout) findViewById(R.id.root_container);
+        content = (ErrorViewLayout) findViewById(R.id.root_container);
         appBar = (AppBar)findViewById(R.id.app_bar);
         controlAppBar(appBar);
         setAppBarHeight();
@@ -262,10 +285,6 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
         Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.icn_2);
         like.setBitmap(b);
 
-        MenuObject addFr = new MenuObject("点赞");
-        BitmapDrawable bd = new BitmapDrawable(getResources(),
-                BitmapFactory.decodeResource(getResources(), R.drawable.icn_3));
-        addFr.setDrawable(bd);
 
         MenuObject addFav = new MenuObject("登录");
         addFav.setResource(R.drawable.icn_4);
@@ -274,7 +293,6 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
         menuObjects.add(close);
         menuObjects.add(send);
         menuObjects.add(like);
-        menuObjects.add(addFr);
         menuObjects.add(addFav);
         return menuObjects;
     }
@@ -289,6 +307,30 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
     @Override
     public void onMenuItemClick(View clickedView, int position) {
 
+        switch (position){
+            case 1:
+                if(!isLogin()){
+                    goLogin(Config.LOGIN_RESULT);
+                }else{
+                    commentRequest();//评论请求
+                }
+                break;
+            case 2:
+                if(!isLogin()){
+                    goLogin(Config.LOGIN_RESULT);
+                }else{
+                    collectionRequest();//收藏请求
+                }
+
+                break;
+
+
+            case 3:
+                //登录
+                LoginActivity.showActivity(BaseActivity.this);
+                break;
+        }
+
     }
 
     @Override
@@ -297,5 +339,75 @@ public abstract class BaseActivity extends SwipeBackActivity implements RequestL
     }
 
 
+    /**
+     * 请求错误信息显示
+     * @param meg
+     */
+    public void errorDisplay(String meg) {
+        content.displayError(true);
+        content.getTextView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestData();
+            }
+        });
+        content.getTextView().animateText("Fuck the error : "+meg +" , you can click to load data again");
+    }
 
+    @Override
+    public void errorHide() {
+        content.displayError(false);
+    }
+
+
+    /**
+     * 调到登录
+     * @param requestCode
+     */
+    public void goLogin(int requestCode){
+        LoginActivity.showActivityForResult(this, requestCode);
+    }
+
+
+    /**
+     * 登录结果
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == Config.LOGIN_RESULT) {
+            if (resultCode == Activity.RESULT_OK) {
+                loginResult(requestCode, true);
+            } else {
+                loginResult(requestCode, false);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void loginResult(int requestCode , boolean isLoginOk){};
+
+    /**
+     * is  login
+     * @return
+     */
+    public boolean isLogin(){
+        return !TextUtils.isEmpty(share.getValueString(Config.LOGIN_KEY_TOKEN , ""));
+    }
+
+    /**
+     * 收藏接口
+     */
+    public void collectionRequest(){
+
+    }
+
+    /**
+     * 评论接口
+     */
+    public void commentRequest(){
+
+    }
 }

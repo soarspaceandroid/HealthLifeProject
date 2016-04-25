@@ -65,6 +65,7 @@ public class PicNewActivity extends BaseActivity implements BaseViewInterface<Pi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pic_new);
         ButterKnife.bind(this);
+        controlMenu(false);
         basePresenter = new BasePresenter().setBaseViewInterface(this).setRequestListener(this);
 
 

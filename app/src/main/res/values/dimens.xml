@@ -49,6 +49,7 @@
 
     <dimen name="dp_300">300dp</dimen>
 
+    <dimen name="dp_400">400dp</dimen>
     <dimen name="dp_200">200dp</dimen>
 
 

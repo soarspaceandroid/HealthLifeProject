@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tab_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff">
+                <com.health.life.view.PagerSlidingTabStrip
+                    android:id="@+id/hot_tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/background_tab"
+                    app:pstsIndicatorColor="@color/color_539728"
+                    app:pstsUnderlineHeight="1dp"
+                    app:pstsShouldExpand="false"
+                    app:pstsSelectedTabTextColor="@color/color_539728"
+                    app:pstsIndicatorHeight="@dimen/indicators_height"
+                    app:pstsTabTextSize="@dimen/tab_text_size"
+                    app:pstsTabTextColor="#000000"
+                    app:pstsSelectedTabTextSize="@dimen/tab_text_size"
+                    />
+            </LinearLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager_hot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tab_parent" />
+
+        </LinearLayout>
+</RelativeLayout>
