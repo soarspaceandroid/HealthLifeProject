@@ -21,13 +21,6 @@
     </declare-styleable>
 
 
-    <!--健康start-->
-
-
-
-    <!--生活start-->
-
-
     <!-- viewpager-->
     <declare-styleable name="PagerSlidingTabStrip">
         <attr name="pstsIndicatorColor" format="color" />
